@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>Credentials Maven Plugin - Checkstyle report</title>
+    <link>http://genthaler.github.com/credentials-maven-plugin/</link>
+    <description>Credentials Maven Plugin - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2013 Codehaus</copyright>
+    <item>
+      <title>File: 1,
+             Errors: 262,
+             Warnings: 2,
+             Infos: 0
+      </title>
+            <link>http://genthaler.github.com/credentials-maven-plugin//checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://genthaler.github.com/credentials-maven-plugin//checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://genthaler.github.com/credentials-maven-plugin//checkstyle.html#org.codehaus.mojo.credentials.CredentialsMojo.java">org/codehaus/mojo/credentials/CredentialsMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  262
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
