@@ -2,6 +2,15 @@
 
 A Maven 2/3 plugin to store credentials from settings.xml and security-settings.xml into properties where they can be used by other plugins and/or Java code.
 
+## Approach
+
+|Task|Status|
+-------------
+|clone the sql-maven-plugin| |
+|copy in the parts of the properties-maven-plugin that publishes properties.| |
+|Fix up unit and integration tests| |
+|Publish to Central| |
+
 ## Current status
 
 Written most of the code, now sorting out unit and integration tests
