@@ -60,7 +60,7 @@
 	</distributionManagement>
 	<properties>
 		<antVersion>1.8</antVersion>
-		<github.global.server>github</github.global.server>
+		<!--		<github.global.server>github</github.global.server> -->
 		<mavenInvokerPluginVersion>1.8</mavenInvokerPluginVersion>
 		<mavenVersion>2.0.6</mavenVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -36,14 +36,8 @@ public class CredentialsMojoTest extends AbstractMojoTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		p = new Properties();
-		p.load(getClass().getResourceAsStream("/test.properties"));
 
 		mojo = new CredentialsMojo();
-
-		// populate parameters
-		mojo.setUsername(p.getProperty("user"));
-		mojo.setPassword(p.getProperty("password"));
 
 		SecDispatcher securityDispatcher = (SecDispatcher) lookup(
 				"org.sonatype.plexus.components.sec.dispatcher.SecDispatcher",
