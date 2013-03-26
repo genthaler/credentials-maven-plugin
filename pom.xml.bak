@@ -1,44 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>mojo-parent</artifactId>
 		<groupId>org.codehaus.mojo</groupId>
 		<version>31</version>
 	</parent>
+	<modelVersion>4.0.0</modelVersion>
 	<artifactId>credentials-maven-plugin</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
-	<name>Credentials Maven Plugin</name>
-	<description>Looks up credentials in settings.xml</description>
+	<version>1.0-SNAPSHOT</version>
 	<url>http://genthaler.github.com/credentials-maven-plugin/</url>
+	<name>Credentials Maven Plugin</name>
 	<inceptionYear>2013</inceptionYear>
-	<licenses>
-		<license>
-			<name>Apache License 2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<id>genthaler</id>
-			<name>Günther Enthaler</name>
-			<email>genthaler@github.com</email>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-			<timezone>-10</timezone>
-		</developer>
-	</developers>
+	<description>Looks up credentials in settings.xml</description>
 	<prerequisites>
 		<maven>${mavenVersion}</maven>
 	</prerequisites>
 	<scm>
 		<connection>scm:git:https://github.com/genthaler/credentials-maven-plugin.git</connection>
 		<developerConnection>scm:git:https://github.com/genthaler/credentials-maven-plugin.git</developerConnection>
-		<tag>HEAD</tag>
 		<url>https://github.com/genthaler/credentials-maven-plugin</url>
+		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
@@ -62,70 +44,27 @@
 		<antVersion>1.8</antVersion>
 		<github.global.server>github</github.global.server>
 		<mavenInvokerPluginVersion>1.8</mavenInvokerPluginVersion>
-		<mavenVersion>2.0.6</mavenVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mavenVersion>2.0.6</mavenVersion>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>axion</groupId>
-			<artifactId>axion</artifactId>
-			<version>1.0-M2-dev</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>${mavenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-settings</artifactId>
-			<version>${mavenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-project</artifactId>
-			<version>${mavenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.shared</groupId>
-			<artifactId>maven-script-interpreter</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.plexus</groupId>
-			<artifactId>plexus-utils</artifactId>
-			<version>1.5.8</version>
-		</dependency>
-		<!-- <dependency> <groupId>org.codehaus.plexus</groupId> <artifactId>plexus-interpolation</artifactId> 
-			<version>1.13</version> </dependency> -->
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.shared</groupId>
-			<artifactId>maven-filtering</artifactId>
-			<version>1.0-beta-3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sonatype.plexus</groupId>
-			<artifactId>plexus-sec-dispatcher</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.shared</groupId>
-			<artifactId>maven-plugin-testing-harness</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<developers>
+		<developer>
+			<id>genthaler</id>
+			<name>Günther Enthaler</name>
+			<email>genthaler@github.com</email>
+			<roles>
+				<role>Java Developer</role>
+			</roles>
+			<timezone>-10</timezone>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Apache License 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -170,18 +109,18 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<configuration></configuration>
+				<configuration />
 			</plugin>
-			<!-- 			<plugin> -->
-			<!-- 				<artifactId>maven-docck-plugin</artifactId> -->
-			<!-- 				<executions> -->
-			<!-- 					<execution> -->
-			<!-- 						<goals> -->
-			<!-- 							<goal>check</goal> -->
-			<!-- 						</goals> -->
-			<!-- 					</execution> -->
-			<!-- 				</executions> -->
-			<!-- 			</plugin> -->
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-docck-plugin</artifactId> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<goals> -->
+<!-- 							<goal>check</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>downloads-maven-plugin</artifactId>
@@ -283,15 +222,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-invoker-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>install</goal>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<debug>true</debug>
 					<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
@@ -304,9 +234,79 @@
 						<goal>credentials:set</goal>
 					</goals>
 				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>install</goal>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>axion</groupId>
+			<artifactId>axion</artifactId>
+			<version>1.0-M2-dev</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-settings</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-script-interpreter</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.codehaus.plexus</groupId> <artifactId>plexus-interpolation</artifactId> 
+			<version>1.13</version> </dependency> -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-filtering</artifactId>
+			<version>1.0-beta-3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.plexus</groupId>
+			<artifactId>plexus-sec-dispatcher</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<reporting>
 		<plugins>
 			<plugin>

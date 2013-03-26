@@ -27,7 +27,7 @@
          <item name="FAQ" href="faq.html"/>
       </menu>
       <menu name="Examples">
-         <item name="Executions" href="examples/execute.html"/>
+         <item name="Setting properties with credentials" href="examples/set.html"/>
          <item name="Settings" href="examples/settings.html"/>
       </menu>
    </body>

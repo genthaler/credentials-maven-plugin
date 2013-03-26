@@ -1,22 +1,19 @@
  ------
  Introduction
  ------
- Dan T. Tran
- <dantran@gmail.com>
+ Günther Enthaler
+ <genthaler@github.com>
  ------
- 2010-02-15
+ 2013-03-25
  ------
 
 Credentials Maven Plugin
 
-  Use this plugin to execute Credentials statements in a combination of strings,
-  a list of files and/or a set of files through <<<credentialsCommand>>>, <<<srcFiles>>>, and
-  <<<fileset>>> configurations respectively.
-
+  Use this plugin to look up credentials in your settings.xml
 
 * Goals Overview
 
-  * {{{./execute-mojo.html}credentials:execute}} Execute Credentials statements.
+  * {{{./set-mojo.html}credentials:set}} set properties with looked-up credentials.
 
   []
 
@@ -41,8 +38,8 @@ Credentials Maven Plugin
 
 * Examples
 
-  * {{{./examples/execute.html}Executions.}}
+  * {{{./examples/set.html}Executions.}}
 
-  * {{{./examples/settings.html}Hide username/password in <<<settings.xml>>>.}}
+  * {{{./examples/settings.html} Hide username/password in <<<settings.xml>>>.}}
 
   []

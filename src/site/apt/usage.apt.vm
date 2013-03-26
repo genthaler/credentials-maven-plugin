@@ -11,9 +11,6 @@ Usage
 
   The execution of this plugin's goal can be bound to a phase of the build lifecycle.
 
-  Use the <<<\<dependencies\>>>> element inside the <<<\<plugin\>>>> element to specify the artifact that has your
-  JDBC driver.
-
 ---------------------------
 <project>
   [...]
@@ -26,21 +23,9 @@ Usage
         <artifactId>credentials-maven-plugin</artifactId>
         <version>${project.version}</version>
 
-        <dependencies>
-          <!-- specify the dependent JDBC driver here -->
-          <dependency>
-            <groupId></groupId>
-            <artifactId></artifactId>
-            <version></version>
-          </dependency>
-        </dependencies>
-
         <!-- common configuration shared by all executions -->
         <configuration>
-          <driver></driver>
-          <url></url>
-          <username></username>
-          <password></password>
+			<useSystemProperties>true</useSystemProperties>
           [...]
         </configuration>
 
@@ -52,13 +37,11 @@ Usage
             </goals>
             <!-- specific configuration for this execution -->
             <configuration>
-              <!-- specify your Credentials commands, can be all of the following configurations -->
-              <fileset></fileset>
-              <credentialsCommand></credentialsCommand>
-              <srcFiles>
-                <srcFile></srcFile>
-                [...]
-              </srcFiles>
+              <!-- specify your credentials sources -->
+				<usernameProperty>username</usernameProperty>
+				<passwordProperty>password</passwordProperty>
+				<settingsKey>my.server</settingsKey>
+	            [...]
             </configuration>
           </execution>
           <execution>

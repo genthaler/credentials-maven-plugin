@@ -1,30 +1,4 @@
 <faqs id="FAQ" title="Frequently Asked Questions">
-    <part id="General">
-        <faq id="DelimiterType">
-            <question>When do I have to set the delimiterType?</question>
-            <answer>
-<p>By default the credentials-maven-plugin will check if a line contains the  specified delimiter, which is by default a semicolon(;). 
-   More complex statements, such as a trigger creation, may contain semi-colons too, although these are not yet the end of the credentials-statement.
-   In such case you have to change the delimiterType to '<strong>row</strong>'.<br/> 
-   Now the plugin will check if the complete <em>row</em> matches the delimiter, in order to recognize the end of the credentials statement.
-</p>   
-<p>An example when to use &lt;delimiterType&gt;row&lt;/delimiterType&gt;:
-<pre>
- CREATE OR REPLACE FUNCTION my_trig()
- RETURNS "trigger" AS
- $BODY$
-   declare 
-   t text; 
-   begin
-    -- any plpgcredentials code here, where each line ends with a semicolon
-   return NEW; 
- end$BODY$
- LANGUAGE 'plpgcredentials' VOLATILE;   
-</pre>
-<strong>Note:</strong> Delimiters within values or comments are not a problem, these will be ignored.<br/>    
-<strong>Note:</strong> The credentials will be parsed until the delimiter or the EOF.
-</p>
-            </answer>
-        </faq>
-    </part>
+	<part id="General">
+	</part>
 </faqs>

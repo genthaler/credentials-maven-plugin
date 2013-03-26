@@ -4,12 +4,13 @@ A Maven 2/3 plugin to store credentials from settings.xml and security-settings.
 
 ## Approach
 
-|Task|Status|
--------------
-|clone the sql-maven-plugin| |
-|copy in the parts of the properties-maven-plugin that publishes properties.| |
-|Fix up unit and integration tests| |
-|Publish to Central| |
+<table>
+<tr><th>Task</th> <th>Status</th></tr>
+<tr><td>clone the sql-maven-plugin</td><td>Done</td></tr>
+<tr><td>copy in the parts of the properties-maven-plugin that publish properties</td><td>Done</td></tr>
+<tr><td> Fix up unit and integration tests </td><td>Pending</td></tr>
+<tr><td> Publish to Central </td><td>Pending</td></tr>
+</table>
 
 ## Current status
 

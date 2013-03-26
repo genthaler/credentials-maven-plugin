@@ -2,62 +2,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>credentials-maven-plugin-it-derby</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<name>credentials-maven-plugin  Integration Test</name>
+	<artifactId>credentials-maven-plugin-test</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>credentials-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>create-table</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
-							<url>jdbc:derby:${project.build.directory}/testdb;create=true</url>
-							<skip>${maven.test.skip}</skip>
-						</configuration>
-					</execution>
-					<execution>
-						<id>update-table</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<credentialsCommand> insert into derbyDB values (1956,'Webster
-								St.'); insert into derbyDB values (1910,'Union St.'); update
-								derbyDB set num=180, addr='Grand Ave.' where num=1956; 
-							</credentialsCommand>
-						</configuration>
-					</execution>
-					<execution>
-						<id>shutdown-database-so-that-test-can-run</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<url>jdbc:derby:;shutdown=true</url>
-							<skipOnConnectionError>true</skipOnConnectionError>
-						</configuration>
-					</execution>
-					<execution>
-						<id>drop-table</id>
-						<phase>test</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<credentialsCommand>drop table derbyDB</credentialsCommand>
-						</configuration>
-					</execution>
-				</executions>
+				<version>@project.version@</version>
+				<configuration>
+					<usernameProperty>username</usernameProperty>
+					<passwordProperty>password</passwordProperty>
+					<settingsKey>my.server</settingsKey>
+					<useSystemProperties>true</useSystemProperties>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

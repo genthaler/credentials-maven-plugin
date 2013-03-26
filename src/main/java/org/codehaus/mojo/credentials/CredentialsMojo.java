@@ -29,19 +29,23 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
- * Executes Credentials against a database.
+ * Looks up credentials in settings.xml, and sets them to specifiable Maven or
+ * JVM properties.
  * 
- * @goal execute
+ * @goal set
+ * @phase validate
  * @threadSafe
  */
-public class CredentialsExecMojo extends AbstractMojo {
+public class CredentialsMojo extends AbstractMojo {
 	/**
 	 * Username. If not given, it will be looked up through
 	 * <code>settings.xml</code>'s server with <code>${settingsKey}</code> as
 	 * key.
 	 * 
+	 * If given, the username will not be looked up in settings.xml.
+	 * 
 	 * @since 1.0
-	 * @parameter expression="${username}"
+	 * @parameter property="username"
 	 */
 	private String username;
 
@@ -50,7 +54,7 @@ public class CredentialsExecMojo extends AbstractMojo {
 	 * to <code>${settingsKey}.username</code> as key.
 	 * 
 	 * @since 1.0
-	 * @parameter expression="${usernameProperty}"
+	 * @parameter property="usernameProperty"
 	 */
 	private String usernameProperty;
 
@@ -59,18 +63,19 @@ public class CredentialsExecMojo extends AbstractMojo {
 	 * <code>settings.xml</code>'s server with <code>${settingsKey}</code> as
 	 * key.
 	 * 
+	 * If given, the password will not be looked up in settings.xml.
+	 * 
 	 * @since 1.0
-	 * @parameter expression="${password}"
+	 * @parameter property="password"
 	 */
 	private String password;
 
 	/**
-	 * (Decrypted) password. If not given, it will be looked up through
-	 * <code>settings.xml</code>'s server with <code>${settingsKey}</code> as
-	 * key.
+	 * Property to which the password will be set. If not given, it will be set
+	 * to <code>${settingsKey}.password</code> as key.
 	 * 
 	 * @since 1.0
-	 * @parameter expression="${password}"
+	 * @parameter property="passwordProperty"
 	 */
 	private String passwordProperty;
 
@@ -79,12 +84,21 @@ public class CredentialsExecMojo extends AbstractMojo {
 	 * properties)
 	 * 
 	 * @since 1.0
-	 * @parameter expression="${useSystemProperties}"
+	 * @parameter property="useSystemProperties" default-value="false"
 	 */
 	private boolean useSystemProperties;
 
 	/**
-	 * @parameter expression="${settings}"
+	 * Server's <code>id</code> in <code>settings.xml</code> to look up username
+	 * and password. Defaults to <code>${url}</code> if not given.
+	 * 
+	 * @since 1.0
+	 * @parameter property="settingsKey"
+	 */
+	private String settingsKey;
+
+	/**
+	 * @parameter property="settings"
 	 * @required
 	 * @since 1.0
 	 * @readonly
@@ -92,18 +106,7 @@ public class CredentialsExecMojo extends AbstractMojo {
 	private Settings settings;
 
 	/**
-	 * Server's <code>id</code> in <code>settings.xml</code> to look up username
-	 * and password. Defaults to <code>${url}</code> if not given.
-	 * 
 	 * @since 1.0
-	 * @parameter expression="${settingsKey}"
-	 */
-	private String settingsKey;
-
-	/**
-	 * MNG-4384
-	 * 
-	 * @since 1.5
 	 * @component role=
 	 *            "hidden.org.sonatype.plexus.components.sec.dispatcher.SecDispatcher"
 	 * @required
@@ -113,6 +116,7 @@ public class CredentialsExecMojo extends AbstractMojo {
 	/**
 	 * The Maven Project Object
 	 * 
+	 * @since 1.0
 	 * @parameter default-value="${project}"
 	 * @required
 	 * @readonly
@@ -120,10 +124,12 @@ public class CredentialsExecMojo extends AbstractMojo {
 	private MavenProject project;
 
 	/**
+	 * @since 1.0
 	 * @parameter default-value="${session}"
 	 * @required
 	 * @readonly
 	 */
+	@SuppressWarnings("unused")
 	private MavenSession mavenSession;
 
 	// ////////////////////////////// Source info /////////////////////////////
@@ -161,6 +167,14 @@ public class CredentialsExecMojo extends AbstractMojo {
 
 		if (getPassword() == null) {
 			setPassword("");
+		}
+
+		if (usernameProperty == null) {
+			usernameProperty = settingsKey + "." + "username";
+		}
+
+		if (passwordProperty == null) {
+			passwordProperty = settingsKey + "." + "password";
 		}
 
 		if (useSystemProperties) {

@@ -1,17 +1,17 @@
  ------
- Executions
+ Set credentials
  ------
- Dan T. Tran
- <dantran@gmail.com>
+ Günther Enthaler
+ <genthaler@github.com>
  ------
- 2010-02-15
+ 2013-03-25
  ------
 
 Executions
 
 
-  The following build configuration shows how to drop/create a database and schema,
-  then populate it before the <<<test>>> phase, and drop the database after the <<<test>>> phase.
+  The following configuration shows how to look up a username/password from your settings.xml.
+  You can then use these credentials in your pom e.g. in a Jetty JNDI definition, or as a system property in a unit test.
 
 -------------------
 <project>
@@ -24,105 +24,13 @@ Executions
         <artifactId>credentials-maven-plugin</artifactId>
         <version>${project.version}</version>
 
-        <dependencies>
-          <!-- specify the dependent jdbc driver here -->
-          <dependency>
-            <groupId>postgrecredentials</groupId>
-            <artifactId>postgrecredentials</artifactId>
-            <version>8.1-407.jdbc3</version>
-          </dependency>
-        </dependencies>
-
-        <!-- common configuration shared by all executions -->
         <configuration>
-          <driver>org.postgrecredentials.Driver</driver>
-          <url>jdbc:postgrescredentials://localhost:5432:yourdb</url>
-          <username>postgres</username>
-          <password>password</password>
-          <!-- You can comment out username/password configurations and
-               have maven to look them up in your settings.xml using ${settingsKey}
-          -->
-          <settingsKey>sensibleKey</settingsKey>
-          <!--all executions are ignored if -Dmaven.test.skip=true-->
-          <skip>${maven.test.skip}</skip>
+          <usernameProperty>username</usernameProperty>
+          <passwordProperty>password</passwordProperty>
+          <settingsKey>my.server</settingsKey>
+          <useSystemProperties>true</useSystemProperties>
         </configuration>
-
-        <executions>
-          <execution>
-            <id>drop-db-before-test-if-any</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <!-- need another database to drop the targeted one -->
-              <url>jdbc:postgrescredentials://localhost:5432:bootstrapdb</url>
-              <autocommit>true</autocommit>
-              <credentialsCommand>drop database yourdb</credentialsCommand>
-              <!-- ignore error when database is not avaiable -->
-              <onError>continue</onError>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>create-db</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <url>jdbc:postgrescredentials://localhost:5432:yourdb</url>
-              <!-- no transaction -->
-              <autocommit>true</autocommit>
-              <credentialsCommand>create database yourdb</credentialsCommand>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>create-schema</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <autocommit>true</autocommit>
-              <srcFiles>
-                <srcFile>src/main/credentials/your-schema.credentials</srcFile>
-              </srcFiles>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>create-data</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <orderFile>ascending</orderFile>
-              <fileset>
-                <basedir>${basedir}</basedir>
-                <includes>
-                  <include>src/test/credentials/test-data2.credentials</include>
-                  <include>src/test/credentials/test-data1.credentials</include>
-                </includes>
-              </fileset>
-            </configuration>
-          </execution>
-
-          <!-- drop db after test -->
-          <execution>
-            <id>drop-db-after-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <autocommit>true</autocommit>
-              <credentialsCommand>drop database yourdb</credentialsCommand>
-            </configuration>
-          </execution>
-        </executions>
+				
       </plugin>
       [...]
     </plugins>

@@ -11,6 +11,6 @@ public class QueryTest extends TestCase {
 
 	public void testQuery() throws Exception {
 
-		assertEquals("thePassword", System.getProperty("password"));
+		assertEquals("thePassword", System.getProperty("me"));
 	}
 }
