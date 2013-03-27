@@ -5,3 +5,4 @@
 *.bak
 /.c9revisions
 /dependency-reduced-pom.xml
+/release.properties
