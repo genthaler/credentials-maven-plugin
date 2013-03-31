@@ -12,6 +12,7 @@ Please also see the [Project Page](http://genthaler.github.com/credentials-maven
 <tr><td>copy in the parts of the properties-maven-plugin that publish properties</td><td> Done </td></tr>
 <tr><td> Fix up unit and integration tests </td><td> Done </td></tr>
 <tr><td> Add links to site </td><td> Pending </td></tr>
+<tr><td> fix github upload plugin to upload as a Maven 2 repository </td><td> Pending </td></tr>
 <tr><td> mvn release </td><td> Pending </td></tr>
 <tr><td> Publish to Central </td><td> Pending </td></tr>
 </table>
