@@ -4,4 +4,4 @@ A Maven 2/3 plugin to store credentials from settings.xml and security-settings.
 
 Please see the [Project Page](http://genthaler.github.com/credentials-maven-plugin/).
 
-There's also the [Issues](issues) page.
+There's also the [Issues](https://github.com/genthaler/credentials-maven-plugin/issues) page.
