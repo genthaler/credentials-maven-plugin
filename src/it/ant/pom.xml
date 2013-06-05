@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>credentials-maven-plugin-test</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>credentials-maven-plugin</artifactId>
+				<version>@project.version@</version>
+				<configuration>
+					<usernameProperty>username</usernameProperty>
+					<passwordProperty>password</passwordProperty>
+					<settingsKey>my.server</settingsKey>
+					<useSystemProperties>true</useSystemProperties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<customTaskPrefix>artifact</customTaskPrefix>
+					<failOnError>true</failOnError>
+					<target>
+						<echoproperties />
+						<fail unless="username" />
+						<fail unless="password" />
+						<fail message="invalid value for username">
+							<condition>
+								<not>
+									<equals arg1="${username}" arg2="me" />
+								</not>
+							</condition>
+						</fail>
+						<fail message="invalid value for password">
+							<condition>
+								<not>
+									<equals arg1="${password}" arg2="mine" />
+								</not>
+							</condition>
+						</fail>
+					</target>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-apache-bsf</artifactId>
+						<version>1.9.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.beanshell</groupId>
+						<artifactId>bsh-bsf</artifactId>
+						<version>2.0b4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant</artifactId>
+						<version>1.9.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>

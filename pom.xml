@@ -11,11 +11,11 @@
 	<packaging>maven-plugin</packaging>
 	<name>Credentials Maven Plugin</name>
 	<description>Looks up credentials in settings.xml</description>
-	<url>http://genthaler.github.com/credentials-maven-plugin/</url>
+	<url>http://genthaler.github.com/${project.artifactId}/</url>
 	<inceptionYear>2013</inceptionYear>
 	<licenses>
 		<license>
-			<name>Apache License 2</name>
+			<name>The Apache Software License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
 		</license>
@@ -35,31 +35,35 @@
 		<maven>${mavenVersion}</maven>
 	</prerequisites>
 	<scm>
-		<connection>scm:git:https://github.com/genthaler/credentials-maven-plugin.git</connection>
-		<developerConnection>scm:git:https://github.com/genthaler/credentials-maven-plugin.git</developerConnection>
+		<connection>scm:git:https://github.com/genthaler/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:https://github.com/genthaler/${project.artifactId}.git</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/genthaler/credentials-maven-plugin</url>
+		<url>https://github.com/genthaler/${project.artifactId}</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/genthaler/credentials-maven-plugin/issues</url>
+		<url>https://github.com/genthaler/${project.artifactId}/issues</url>
 	</issueManagement>
 	<distributionManagement>
 		<repository>
-			<url>file:///tmp</url>
+			<id>github</id>
+			<name>GitHub ${project.artifactId} Repository</name>
+			<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
 		</repository>
 		<snapshotRepository>
-			<url>file:///tmp</url>
+			<id>github</id>
+			<name>GitHub ${project.artifactId} Repository</name>
+			<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
 		</snapshotRepository>
 		<site>
 			<id>github</id>
 			<name>GitHub</name>
-			<url>http://genthaler.github.com/credentials-maven-plugin/</url>
+			<url>http://genthaler.github.com/${project.artifactId}/</url>
 		</site>
-		<downloadUrl>https://github.com/genthaler/credentials-maven-plugin/archive/master.zip</downloadUrl>
+		<downloadUrl>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo/org/apache/maven/archetypes/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</downloadUrl>
 	</distributionManagement>
 	<properties>
-		<antVersion>1.8</antVersion>
+		<antVersion>1.9.1</antVersion>
 		<github.global.server>github</github.global.server>
 		<mavenInvokerPluginVersion>1.8</mavenInvokerPluginVersion>
 		<mavenVersion>2.0.6</mavenVersion>
@@ -125,10 +129,34 @@
 			<version>1.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-apache-bsf</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh-bsf</artifactId>
+			<version>2.0b4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh</artifactId>
+			<version>2.0b5</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
 				<plugin>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
 					<version>2.6</version>
@@ -165,9 +193,19 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration></configuration>
@@ -184,35 +222,32 @@
 			<!-- </plugin> -->
 			<plugin>
 				<groupId>com.github.github</groupId>
-				<artifactId>downloads-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>upload</goal>
-						</goals>
-						<configuration>
-							<description>${project.version} release of ${project.name}</description>
-							<override>true</override>
-							<includeAttached>true</includeAttached>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>site</phase>
+						<id>site</id>
+						<phase>site-deploy</phase>
 						<goals>
 							<goal>site</goal>
 						</goals>
+						<configuration>
+							<message>Creating site for ${project.version}</message>
+						</configuration>
+					</execution>
+					<execution>
+						<id>repo</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<configuration>
+							<message>Maven artifacts for ${project.version}</message>
+							<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+							<branch>refs/heads/mvn-repo</branch>
+							<merge>true</merge>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<message>Creating site for ${project.version}</message>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.google.code.sortpom</groupId>
@@ -299,10 +334,53 @@
 					<postBuildHookScript>verify</postBuildHookScript>
 					<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
 					<settingsFile>src/it/settings.xml</settingsFile>
+					<filterProperties>
+						<sitePluginVersion>3.0</sitePluginVersion>
+						<antVersion>${antVersion}</antVersion>
+					</filterProperties>
 					<goals>
 						<goal>clean</goal>
 						<goal>credentials:set</goal>
 					</goals>
+				</configuration>
+			</plugin>
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-invoker-plugin</artifactId> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>pre-integration-test</id> -->
+			<!-- <goals> -->
+			<!-- <goal>install</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- <execution> -->
+			<!-- <id>integration-test</id> -->
+			<!-- <goals> -->
+			<!-- <goal>integration-test</goal> -->
+			<!-- <goal>verify</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- <configuration> -->
+			<!-- <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo> -->
+			<!-- <cloneClean>true</cloneClean> -->
+			<!-- <pomIncludes> -->
+			<!-- <pomInclude>*</pomInclude> -->
+			<!-- </pomIncludes> -->
+			<!-- <preBuildHookScript>setup</preBuildHookScript> -->
+			<!-- <postBuildHookScript>verify</postBuildHookScript> -->
+			<!-- <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
+			<!-- <settingsFile>src/it/settings.xml</settingsFile> -->
+			<!-- <filterProperties> -->
+			<!-- <sitePluginVersion>3.0</sitePluginVersion> -->
+			<!-- <antVersion>${antVersion}</antVersion> -->
+			<!-- </filterProperties> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skipDeploy>true</skipDeploy>
 				</configuration>
 			</plugin>
 		</plugins>

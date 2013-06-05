@@ -54,7 +54,7 @@ public class CredentialsMojo extends AbstractMojo {
 	 * to <code>${settingsKey}.username</code> as key.
 	 * 
 	 * @since 1.0
-	 * @parameter property="usernameProperty"
+	 * @parameter property="usernameProperty" default="username"
 	 */
 	private String usernameProperty;
 
@@ -75,7 +75,7 @@ public class CredentialsMojo extends AbstractMojo {
 	 * to <code>${settingsKey}.password</code> as key.
 	 * 
 	 * @since 1.0
-	 * @parameter property="passwordProperty"
+	 * @parameter property="passwordProperty" default="password"
 	 */
 	private String passwordProperty;
 
@@ -141,19 +141,18 @@ public class CredentialsMojo extends AbstractMojo {
 	 * @throws MojoExecutionException
 	 */
 	public void execute() throws MojoExecutionException {
-		if ((getUsername() == null || getPassword() == null)
-				&& (settings != null)) {
+		if ((username == null || password == null) && (settings != null)) {
 			Server server = this.settings.getServer(this.settingsKey);
 
 			if (server != null) {
-				if (getUsername() == null) {
-					setUsername(server.getUsername());
+				if (username == null) {
+					username = server.getUsername();
 				}
 
-				if (getPassword() == null && server.getPassword() != null) {
+				if (password == null && server.getPassword() != null) {
 					try {
-						setPassword(securityDispatcher.decrypt(server
-								.getPassword()));
+						password = securityDispatcher.decrypt(server
+								.getPassword());
 					} catch (SecDispatcherException e) {
 						throw new MojoExecutionException(e.getMessage());
 					}
@@ -161,12 +160,12 @@ public class CredentialsMojo extends AbstractMojo {
 			}
 		}
 
-		if (getUsername() == null) {
-			setUsername("");
+		if (username == null) {
+			username = "";
 		}
 
-		if (getPassword() == null) {
-			setPassword("");
+		if (password == null) {
+			password = "";
 		}
 
 		if (usernameProperty == null) {
@@ -186,10 +185,13 @@ public class CredentialsMojo extends AbstractMojo {
 		}
 	}
 
+	// Getters and setters for the sake of unit tests
+	@Deprecated
 	String getUsername() {
 		return this.username;
 	}
 
+	@Deprecated
 	void setUsername(String username) {
 		this.username = username;
 	}
@@ -202,10 +204,12 @@ public class CredentialsMojo extends AbstractMojo {
 		this.usernameProperty = usernameProperty;
 	}
 
+	@Deprecated
 	String getPassword() {
 		return this.password;
 	}
 
+	@Deprecated
 	void setPassword(String password) {
 		this.password = password;
 	}

@@ -1,16 +1,12 @@
 package org.codehaus.mojo.credentials;
 
-import java.credentials.Connection;
-import java.credentials.Driver;
-import java.credentials.ResultSet;
-import java.credentials.Statement;
-
 import junit.framework.TestCase;
 
-public class QueryTest extends TestCase {
+public class CredentialsTest extends TestCase {
 
-	public void testQuery() throws Exception {
-
-		assertEquals("thePassword", System.getProperty("me"));
+	public void testCredentials() throws Exception {
+		System.out.println(System.getProperties().toString());
+		assertEquals("me", System.getProperty("username"));
+		assertEquals("mine", System.getProperty("password"));
 	}
 }

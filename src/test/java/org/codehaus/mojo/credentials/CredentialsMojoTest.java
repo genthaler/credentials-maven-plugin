@@ -21,12 +21,24 @@ import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
+import org.junit.Before;
+import org.junit.Test;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 
 /**
  * Unit test for simple CredentialsMojo.
  */
 public class CredentialsMojoTest extends AbstractMojoTestCase {
+	private static final String PASSWORD_PROPERTY = "passwordProperty";
+
+	private static final String USERNAME_PROPERTY = "usernameProperty";
+
+	private static final String KEY = "somekey";
+
+	private static final String PASSWORD = "password";
+
+	private static final String USERNAME = "username";
+
 	private CredentialsMojo mojo;
 
 	private Properties p;
@@ -34,6 +46,7 @@ public class CredentialsMojoTest extends AbstractMojoTestCase {
 	private MavenProjectStub project;
 
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -48,6 +61,7 @@ public class CredentialsMojoTest extends AbstractMojoTestCase {
 		setVariableValueToObject(mojo, "project", project);
 	}
 
+	@Test
 	public void testDefaultUsernamePassword() throws MojoExecutionException {
 
 		Settings settings = new Settings();
@@ -58,8 +72,8 @@ public class CredentialsMojoTest extends AbstractMojoTestCase {
 
 		mojo.setUsername(null);
 		mojo.setPassword(null);
-		mojo.setUsernameProperty("usernameProperty");
-		mojo.setPasswordProperty("passwordProperty");
+		mojo.setUsernameProperty(USERNAME_PROPERTY);
+		mojo.setPasswordProperty(PASSWORD_PROPERTY);
 		mojo.setUseSystemProperties(false);
 
 		mojo.execute();
@@ -68,30 +82,54 @@ public class CredentialsMojoTest extends AbstractMojoTestCase {
 		assertEquals("", mojo.getPassword());
 	}
 
+	@Test
 	public void testUsernamePasswordLookup() throws MojoExecutionException {
 
 		Settings settings = new Settings();
 		Server server = new Server();
-		server.setId("somekey");
-		server.setUsername("username");
-		server.setPassword("password");
+		server.setId(KEY);
+		server.setUsername(USERNAME);
+		server.setPassword(PASSWORD);
 		settings.addServer(server);
 
 		mojo.setSettings(settings);
 
 		// force a lookup of username
-		mojo.setSettingsKey("somekey");
-		mojo.setUsername(null);
-		mojo.setPassword(null);
-		mojo.setUsernameProperty("usernameProperty");
-		mojo.setPasswordProperty("passwordProperty");
+		mojo.setSettingsKey(KEY);
+		mojo.setUsernameProperty(USERNAME_PROPERTY);
+		mojo.setPasswordProperty(PASSWORD_PROPERTY);
 		mojo.setUseSystemProperties(true);
 
 		mojo.execute();
 
-		assertEquals("username", mojo.getUsername());
-		assertEquals("password", mojo.getPassword());
-		assertEquals("username", System.getProperty("usernameProperty"));
-		assertEquals("password", System.getProperty("passwordProperty"));
+		assertEquals(USERNAME, mojo.getUsername());
+		assertEquals(PASSWORD, mojo.getPassword());
+		assertEquals(USERNAME, System.getProperty(USERNAME_PROPERTY));
+		assertEquals(PASSWORD, System.getProperty(PASSWORD_PROPERTY));
+	}
+
+	@Test
+	public void testLookupSettingsKeyOnlySystemProperties()
+			throws MojoExecutionException {
+
+		Settings settings = new Settings();
+		Server server = new Server();
+		server.setId(KEY);
+		server.setUsername(USERNAME);
+		server.setPassword(PASSWORD);
+		settings.addServer(server);
+
+		mojo.setSettings(settings);
+
+		// force a lookup of username
+		mojo.setSettingsKey(KEY);
+		mojo.setUseSystemProperties(true);
+
+		mojo.execute();
+
+		// assertEquals(USERNAME, mojo.getUsername());
+		// assertEquals(PASSWORD, mojo.getPassword());
+		assertEquals(USERNAME, System.getProperty(KEY + "." + "username"));
+		assertEquals(PASSWORD, System.getProperty(KEY + "." + "password"));
 	}
 }
