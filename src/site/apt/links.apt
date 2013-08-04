@@ -11,14 +11,14 @@ Credentials Maven Plugin
 
   Useful links
 
-* {{{http://mojo.codehaus.org/sql-maven-plugin/}}}
-* {{{http://mojo.codehaus.org/sql-maven-plugin/examples/settings.html}}}
-* {{{http://mojo.codehaus.org/properties-maven-plugin}}}
-* {{{http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide}}}
-* {{{http://beanstalker.ingenieux.com.br/beanstalk-maven-plugin/expose-security-credentials-mojo.html}}}
-* {{{http://www.sonatype.com/books/mvnref-book/reference/resource-filtering-sect-properties.html}}}
-* {{{http://stackoverflow.com/questions/1559179/how-to-get-the-values-of-server-defined-in-the-settings-xml-to-use-them-in-my-po}}}
-* {{{http://maven.apache.org/ref/2.1.0/maven-settings/apidocs/org/apache/maven/settings/Settings.html#getServer%28java.lang.String%29}}}
-* {{{http://docs.codehaus.org/display/GMAVEN/Executing+Groovy+Code}}}
+* {{{http://mojo.codehaus.org/sql-maven-plugin/}} SQL Maven Plugin}
+* {{{http://mojo.codehaus.org/sql-maven-plugin/examples/settings.html}} SQL Maven Plugin settings}
+* {{{http://mojo.codehaus.org/properties-maven-plugin}} Properties Maven Plugin}
+* {{{http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide}} Maven Properties Guide}
+* {{{http://beanstalker.ingenieux.com.br/beanstalk-maven-plugin/expose-security-credentials-mojo.html}} Beanstalk Maven Plugin - Expose Security Settings goal}
+* {{{http://www.sonatype.com/books/mvnref-book/reference/resource-filtering-sect-properties.html}} Resource Filtering}
+* {{{http://stackoverflow.com/questions/1559179/how-to-get-the-values-of-server-defined-in-the-settings-xml-to-use-them-in-my-po}} StackOverflow question}
+* {{{http://maven.apache.org/ref/2.1.0/maven-settings/apidocs/org/apache/maven/settings/Settings.html#getServer%28java.lang.String%29}} Maven Settings Object API}
+* {{{http://docs.codehaus.org/display/GMAVEN/Executing+Groovy+Code}} Groovy Maven Plugin - Executing Groovy Code}
 
 []

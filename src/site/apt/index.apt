@@ -9,14 +9,35 @@
 
 Credentials Maven Plugin
 
-  Use this plugin to look up credentials in your settings.xml
+	The ability to look up credentials in a file that's only visible to the user
+	running Maven is one of the great selling points of Maven. Some plugins that
+	support this functionality include the {{{http://maven.apache.org/scm/maven-scm-plugin}Maven SCM Plugin}}, 
+	{{{http://mojo.codehaus.org/sql-maven-plugin}SQL Maven Plugin}} and 
+	{{{http://mojo.codehaus.org/dbunit-maven-plugin}DbUnit Maven Plugin}}.
+	
+	Unfortunately some important plugins don't yet support this functionality,
+	such as the {{{http://maven.apache.org/plugins/maven-scm-publish-plugin}SCM Publish Maven Plugin}}.
+	
+	This plugin looks up credentials in ~/.m2/settings.xml, and sets them to specifiable Maven and/or Java system properties.
+	
+	Also provides the ability to set the username and password via system
+	properties. This is to support situations where the credentials may not be
+	available in all execution environments, but setting the credentials in plain text is controlled, 
+	such as continuous integration servers.
+	
+	By way of attribution, this plugin is essentially a mashup of the 
+	{{{http://mojo.codehaus.org/sql-maven-plugin}SQL Maven Plugin}} and the
+	{{{http://mojo.codehaus.org/properties-maven-plugin}Properties Maven Plugin}}, 
+	with some help from {{{http://svn.apache.org/repos/asf/maven/sandbox/trunk/examples/plugins/maven-security-mojo}this example}}.
+
 
 * Goals Overview
 
   * {{{./set-mojo.html}credentials:set}} set properties with looked-up credentials.
+  
+  * {{{./help-mojo.html}credentials:help}} get help.
 
   []
-
 
 * Usage
 
@@ -34,7 +55,6 @@ Credentials Maven Plugin
   Of course, patches are most welcome too. Contributors can check out the project from our
   {{{./source-repository.html}source repository}} and will find supplementary information in the
   {{{http://maven.apache.org/guides/development/guide-helping.html}guide to helping with Maven}}. 
-
 
 * Examples
 
