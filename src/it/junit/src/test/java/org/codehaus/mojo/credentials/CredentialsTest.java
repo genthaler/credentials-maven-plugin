@@ -1,4 +1,4 @@
-package com.github.mojo.credentials;
+package com.github.genthaler.credentials;
 
 import junit.framework.TestCase;
 
