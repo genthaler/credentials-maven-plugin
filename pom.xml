@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.genthaler</groupId>
 	<artifactId>credentials-maven-plugin</artifactId>
@@ -27,9 +28,19 @@
 			<timezone>-10</timezone>
 		</developer>
 	</developers>
-	<prerequisites>
-		<!-- 		<maven>${mavenVersion}</maven> -->
-	</prerequisites>
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/genthaler/${project.artifactId}</url>
+		<notifiers>
+			<notifier>
+				<type>mail</type>
+				<sendOnSuccess>true</sendOnSuccess>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnError>true</sendOnError>
+				<sendOnWarning>true</sendOnWarning>
+			</notifier>
+		</notifiers>
+	</ciManagement>
 	<scm>
 		<connection>scm:git:https://github.com/genthaler/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:https://github.com/genthaler/${project.artifactId}.git</developerConnection>
@@ -56,7 +67,7 @@
 			<name>GitHub</name>
 			<url>http://genthaler.github.com/${project.artifactId}/</url>
 		</site>
-		<downloadUrl>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo/org/apache/maven/archetypes/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</downloadUrl>
+		<downloadUrl>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo/com/github/genthaler/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</downloadUrl>
 	</distributionManagement>
 	<properties>
 		<ant.version>1.9.1</ant.version>
