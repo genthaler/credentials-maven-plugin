@@ -158,9 +158,9 @@ public class CredentialsMojo extends AbstractMojo {
 		if (null == project.getProperties().getProperty(usernameProperty)
 				|| null == project.getProperties()
 						.getProperty(passwordProperty)
-				&& (!useSystemProperties || null == System
-						.getProperty(usernameProperty)
-						&& null == System.getProperty(passwordProperty))) {
+				&& (!useSystemProperties || (null == System
+						.getProperty(usernameProperty) && null == System
+						.getProperty(passwordProperty)))) {
 
 			if (null == settingsKey) {
 				throw new MojoExecutionException(

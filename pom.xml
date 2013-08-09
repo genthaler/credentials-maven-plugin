@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.genthaler</groupId>
 	<artifactId>credentials-maven-plugin</artifactId>
@@ -9,10 +10,6 @@
 	<description>Looks up credentials in settings.xml</description>
 	<url>http://genthaler.github.com/${project.artifactId}/</url>
 	<inceptionYear>2013</inceptionYear>
-	<organization>
-		<name>GitHub</name>
-		<url>http://github.com</url>
-	</organization>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -31,16 +28,19 @@
 			<timezone>-10</timezone>
 		</developer>
 	</developers>
-	<mailingLists>
-		<mailingList>
-			<name>Credentials Maven Plugin Google Group</name>
-			<subscribe>http://groups.google.com/group/credentials-maven-plugin/subscribe</subscribe>
-			<archive>http://groups.google.com/group/credentials-maven-plugin</archive>
-		</mailingList>
-	</mailingLists>
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/genthaler/${project.artifactId}</url>
+		<notifiers>
+			<notifier>
+				<type>mail</type>
+				<sendOnSuccess>true</sendOnSuccess>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnError>true</sendOnError>
+				<sendOnWarning>true</sendOnWarning>
+			</notifier>
+		</notifiers>
+	</ciManagement>
 	<scm>
 		<connection>scm:git:https://github.com/genthaler/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:https://github.com/genthaler/${project.artifactId}.git</developerConnection>
@@ -51,19 +51,6 @@
 		<system>GitHub</system>
 		<url>https://github.com/genthaler/${project.artifactId}/issues</url>
 	</issueManagement>
-	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.org/genthaler/${project.artifactId}</url>
-		<notifiers>
-			<notifier>
-				<type>mail</type>
-				<sendOnError>true</sendOnError>
-				<sendOnFailure>true</sendOnFailure>
-				<sendOnSuccess>true</sendOnSuccess>
-				<sendOnWarning>true</sendOnWarning>
-			</notifier>
-		</notifiers>
-	</ciManagement>
 	<distributionManagement>
 		<repository>
 			<id>github</id>
@@ -189,8 +176,17 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<version>3.2</version>
+				<!-- same version as build plugin -->
+				<!-- <configuration> -->
+				<!-- <goalPrefix>test-maven</goalPrefix> -->
+				<!-- <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound> -->
+				<!-- </configuration> -->
 				<executions>
 					<execution>
 						<id>mojo-descriptor</id>
@@ -212,18 +208,8 @@
 				<version>0.5</version>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-doap-plugin</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<id>site</id>
-						<phase>site</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
+				<artifactId>maven-docck-plugin</artifactId>
+				<version>1.0</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -235,7 +221,18 @@
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4</version>
+				<configuration></configuration>
 			</plugin>
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-docck-plugin</artifactId> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <goals> -->
+			<!-- <goal>check</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
@@ -322,9 +319,7 @@
 							<goal>verify</goal>
 						</goals>
 						<inherited>false</inherited>
-						<configuration>
-							<skipITs>true</skipITs>
-						</configuration>
+						<configuration></configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -385,13 +380,6 @@
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.2</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.4</version>
-					</dependency>
-				</dependencies>
 				<configuration>
 					<skipDeploy>true</skipDeploy>
 				</configuration>
@@ -451,142 +439,14 @@
 						<version>4.11</version>
 					</dependency>
 				</dependencies>
-				<configuration>
-					<outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-							<goal>test-jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>javadoc</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>clirr-maven-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 		</plugins>
 	</build>
 	<reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.6</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.2</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.15</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.2</version>
-			</plugin>
-			<plugin>
 				<artifactId>maven-invoker-plugin</artifactId>
 				<version>${mavenInvokerPluginVersion}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.9</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>github-report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-				<configuration>
-					<onlyMilestoneIssues>false</onlyMilestoneIssues>
-					<onlyCurrentVersion>false</onlyCurrentVersion>
-					<includeOpenIssues>true</includeOpenIssues>
-					<columnNames>Type,Key,Summary,Assignee,Status,Fix Version</columnNames>
-					<sortColumnNames>Type,Key</sortColumnNames>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>jxr</report>
-							<report>test-jxr</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-				<configuration>
-					<linkJavadoc>true</linkJavadoc>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>taglist-maven-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>clirr-maven-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.0.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.5.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.10</version>
-				<configuration>
-					<includeTestSourceDirectory>true</includeTestSourceDirectory>
-					<excludes>**\/HelpMojo.java</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-linkcheck-plugin</artifactId>
-				<version>1.1</version>
 			</plugin>
 		</plugins>
 	</reporting>
