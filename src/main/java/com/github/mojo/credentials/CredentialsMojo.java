@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.mojo.credentials;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
