@@ -42,7 +42,6 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.junit.runner.RunWith;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 
-import com.github.genthaler.credentials.CredentialsMojo;
 import com.github.genthaler.credentials.CredentialsMojoTest.MyReportBuilder;
 import com.github.genthaler.credentials.CredentialsMojoTest.MyStoryControls;
 import com.github.genthaler.credentials.CredentialsMojoTest.MyStoryLoader;
