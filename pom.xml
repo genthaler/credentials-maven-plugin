@@ -64,7 +64,7 @@
 		<jbehave.version>3.9-beta-1</jbehave.version>
 		<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
 		<mavenInvokerPluginVersion>1.8</mavenInvokerPluginVersion>
-		<mavenVersion>3.0.0</mavenVersion>
+		<mavenVersion>3.0.5</mavenVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencyManagement>
