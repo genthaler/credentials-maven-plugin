@@ -28,7 +28,7 @@
 		</developer>
 	</developers>
 	<prerequisites>
-		<!-- 		<maven>${mavenVersion}</maven> -->
+<!-- 		<maven>${mavenVersion}</maven> -->
 	</prerequisites>
 	<scm>
 		<connection>scm:git:https://github.com/genthaler/${project.artifactId}.git</connection>
