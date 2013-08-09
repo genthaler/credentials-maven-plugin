@@ -1,7 +1,7 @@
 Executions
 ----------
 
-The following configuration shows how to look up a username/password from your `~/.m2/settings.xml`.
+The following configuration shows how to look up a username/password from your settings.xml.
 
 You can then use these credentials in your pom e.g. in a Jetty JNDI definition, or as a system property in a unit test.
 

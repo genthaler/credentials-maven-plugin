@@ -29,8 +29,8 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
- * This plugin looks up credentials in <code>~/.m2/settings.xml</code>, and sets
- * them to specifiable Maven and/or Java system properties.
+ * This plugin looks up credentials in ~/.m2/settings.xml, and sets them to
+ * specifiable Maven and/or Java system properties.
  * 
  * Also provides the ability to set the username and password via system
  * properties. This is to support situations where the credentials may not be
@@ -39,8 +39,8 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  * 
  * If the computed {@link #usernameProperty} and/or {@link #passwordProperty}
  * already exist as either Maven or system properties, neither will be looked up
- * in <code>~/.m2/settings.xml</code>, since it's assumed that these have been
- * deliberately set in order to override the <code>pom.xml</code> settings.
+ * in settings.xml, since it's assumed that these have been deliberately set in
+ * order to override the pom.xml settings.
  * 
  * @goal set
  * @phase validate
@@ -49,8 +49,8 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 public class CredentialsMojo extends AbstractMojo {
 
 	/**
-	 * Property to which the username will be set. If not given, it will be set
-	 * to <code>${settingsKey}.username</code>.
+	 * Property to which the username will be set. If not given as a system
+	 * parameter, it will be set to <code>${settingsKey}.username</code>.
 	 * 
 	 * @since 1.0
 	 * @parameter property="credentials.usernameProperty"
@@ -59,8 +59,8 @@ public class CredentialsMojo extends AbstractMojo {
 	private String usernameProperty;
 
 	/**
-	 * Property to which the password will be set. If not given, it will be set
-	 * to <code>${settingsKey}.password</code>.
+	 * Property to which the password will be set. If not given as a system
+	 * parameter, it will be set to <code>${settingsKey}.password</code> as key.
 	 * 
 	 * @since 1.0
 	 * @parameter property="credentials.passwordProperty"
@@ -71,10 +71,9 @@ public class CredentialsMojo extends AbstractMojo {
 	/**
 	 * Whether to set system properties (as well as the default Maven project
 	 * properties). This is to support situations where it's not possible or
-	 * convenient to propagate Maven properties. An example is the <a
-	 * href="maven.apache.org/plugins/maven-antrun-plugin">Maven AntRun
-	 * Plugin</a>, where only certain Maven properties are propagated into the
-	 * Ant project context.
+	 * convenient to propagate Maven properties. An example is the
+	 * maven-antrun-plugin, where only certain Maven properties are propagated
+	 * into the Ant project context.
 	 * 
 	 * @since 1.0
 	 * @parameter property="credentials.useSystemProperties"
@@ -84,8 +83,9 @@ public class CredentialsMojo extends AbstractMojo {
 	private boolean useSystemProperties;
 
 	/**
-	 * Server <code>id</code> in <code>~/.m2/settings.xml</code> to look up
-	 * username/password credentials.
+	 * Server's <code>id</code> in <code>settings.xml</code> to look up
+	 * username/password credentials. Defaults to <code>${url}</code> if not
+	 * given.
 	 * 
 	 * @since 1.0
 	 * @parameter property="credentials.settingsKey"

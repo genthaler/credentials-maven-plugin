@@ -3,11 +3,11 @@ Usage
 
 Just a short word on encrypted credentials, it looks like if you want to encrypt some of your credentials you have to encrypt them all i.e. it's all or nothing.
 
-For an idea of how to use this plugin, it's instructive to look at some of the [integration tests](${project.scm.url}/tags/${project.version}/src/it).
+For an idea of how to use this plugin, it's instructive to look at some of the [integration tests](${project.scm.url}/tags/${project.version}/src/it). 
 
-In many cases, you want to enable the setting of system properties; it's the only way to get properties into JUnit tests (unless you don't fork) or the [Antrun Maven Plugin](maven.apache.org/plugins/maven-antrun-plugin).
+In many cases, you want to enable the setting of system properties; it's the only way to get properties into JUnit tests (unless you don't fork) or the Antrun Maven Plugin.
 	
-If you want to override particular credentials, simply define the properties that this plugin would have defined on the command line using the -D switch. The [Credentials Maven Plugin](/) won't try to re-set these properties.
+If you want to override particular credentials, simply define the properties that this plugin would have defined on the command line using the -D switch. The Credentials Maven Plugin won't try to re-set these properties.
 
 The execution of this plugin's goal can be bound to a phase of the build lifecycle, usually the validate phase.
 
