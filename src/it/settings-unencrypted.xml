@@ -30,6 +30,9 @@
 			<password>yours</password>
 		</server>
 	</servers>
+	<pluginGroups>
+		<pluginGroup>com.alexecollins.maven.plugin</pluginGroup>
+	</pluginGroups>
 	<profiles>
 		<profile>
 			<id>it-repo</id>

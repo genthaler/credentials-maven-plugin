@@ -1,0 +1,33 @@
+Executions
+----------
+
+The following configuration shows how to look up a username/password from your `~/.m2/settings.xml`.
+
+You can then use these credentials in your pom e.g. in a Jetty JNDI definition, or as a system property in a unit test.
+
+	<project>
+	  [...]
+	  <build>
+	    [...]
+	    <plugins>
+	      <plugin>
+	        <groupId>com.github.genthaler</groupId>
+	        <artifactId>credentials-maven-plugin</artifactId>
+	        <version>${project.version}</version>
+	
+	        <configuration>
+	          <usernameProperty>username</usernameProperty>
+	          <passwordProperty>password</passwordProperty>
+	          <settingsKey>my.server</settingsKey>
+	          <useSystemProperties>true</useSystemProperties>
+	        </configuration>
+					
+	      </plugin>
+	      [...]
+	    </plugins>
+	    [...]
+	  </build>
+	  [...]
+	</project>
+
+	

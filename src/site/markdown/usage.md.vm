@@ -1,0 +1,56 @@
+Usage
+-----
+
+Just a short word on encrypted credentials, it looks like if you want to encrypt some of your credentials you have to encrypt them all i.e. it's all or nothing.
+
+For an idea of how to use this plugin, it's instructive to look at some of the [integration tests](${project.scm.url}/tags/${project.version}/src/it).
+
+In many cases, you want to enable the setting of system properties; it's the only way to get properties into JUnit tests (unless you don't fork) or the [Antrun Maven Plugin](maven.apache.org/plugins/maven-antrun-plugin).
+	
+If you want to override particular credentials, simply define the properties that this plugin would have defined on the command line using the -D switch. The [Credentials Maven Plugin](/) won't try to re-set these properties.
+
+The execution of this plugin's goal can be bound to a phase of the build lifecycle, usually the validate phase.
+
+	<project>
+	  [...]
+	  <build>
+	    [...]
+	    <plugins>
+	      [...]
+	      <plugin>
+	        <groupId>com.github.genthaler</groupId>
+	        <artifactId>credentials-maven-plugin</artifactId>
+	        <version>${project.version}</version>
+	
+	        <!-- common configuration shared by all executions -->
+	        <configuration>
+				<useSystemProperties>true</useSystemProperties>
+	          [...]
+	        </configuration>
+	        <executions>
+	          <execution>
+	            <phase></phase>
+	            <goals>
+	              <goal>execute</goal>
+	            </goals>
+	            <!-- specific configuration for this execution -->
+	            <configuration>
+	              <!-- specify your credentials sources -->
+					<usernameProperty>username</usernameProperty>
+					<passwordProperty>password</passwordProperty>
+					<settingsKey>my.server</settingsKey>
+		            [...]
+	            </configuration>
+	          </execution>
+	          <execution>
+	            [...]
+	          </execution>
+	          [...]
+	        </executions>
+	      </plugin>
+	      [...]
+	    </plugins>
+	    [...]
+	  </build>
+	  [...]
+	</project>

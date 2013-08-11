@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.genthaler</groupId>
+	<artifactId>credentials-maven-plugin-test</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.alexecollins.maven.plugin</groupId>
+				<artifactId>script-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<script><![CDATA[
+							if (!"you".equalsIgnoreCase(project.properties.getProperty("your.server.username")))
+								throw new Exception("Property 'your.server.username' not equal to 'you'"); 
+							if (!"yours".equalsIgnoreCase(project.properties.getProperty("your.server.password")))
+								throw new Exception("Property 'your.server.password' not equal to 'yours'"); 
+						]]>
+					</script>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.beanshell</groupId>
+						<artifactId>bsh</artifactId>
+						<version>2.0b5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
