@@ -1,4 +1,4 @@
-package com.github.mojo.credentials;
+package com.github.genthaler.credentials;
 
 /*
  * Copyright 2006 The Codehaus
@@ -42,9 +42,9 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.junit.runner.RunWith;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 
-import com.github.mojo.credentials.CredentialsMojoTest.MyReportBuilder;
-import com.github.mojo.credentials.CredentialsMojoTest.MyStoryControls;
-import com.github.mojo.credentials.CredentialsMojoTest.MyStoryLoader;
+import com.github.genthaler.credentials.CredentialsMojoTest.MyReportBuilder;
+import com.github.genthaler.credentials.CredentialsMojoTest.MyStoryControls;
+import com.github.genthaler.credentials.CredentialsMojoTest.MyStoryLoader;
 
 /**
  * Unit test for CredentialsMojo.
