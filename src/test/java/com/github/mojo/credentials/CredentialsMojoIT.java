@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.mojo.credentials;
 
 /*
  * Copyright 2006 The Codehaus
@@ -63,9 +63,9 @@ import org.jbehave.core.junit.AnnotatedPathRunner;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.junit.runner.RunWith;
 
-import com.github.genthaler.credentials.CredentialsMojoIT.MyReportBuilder;
-import com.github.genthaler.credentials.CredentialsMojoIT.MyStoryControls;
-import com.github.genthaler.credentials.CredentialsMojoIT.MyStoryLoader;
+import com.github.mojo.credentials.CredentialsMojoIT.MyReportBuilder;
+import com.github.mojo.credentials.CredentialsMojoIT.MyStoryControls;
+import com.github.mojo.credentials.CredentialsMojoIT.MyStoryLoader;
 
 /**
  * Unit test for CredentialsMojo.
