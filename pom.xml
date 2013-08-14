@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.genthaler</groupId>
 	<artifactId>credentials-maven-plugin</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>maven-plugin</packaging>
 	<name>Credentials Maven Plugin</name>
 	<description>Looks up credentials in settings.xml</description>
@@ -44,7 +44,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/genthaler/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:https://github.com/genthaler/${project.artifactId}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>credentials-maven-plugin-1.0</tag>
 		<url>https://github.com/genthaler/${project.artifactId}</url>
 	</scm>
 	<issueManagement>
