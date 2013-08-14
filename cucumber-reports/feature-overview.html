@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cucumber-JVM Html Reports - Feature Overview</title>
+	<link rel="stylesheet" href="blue/css/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="blue/css/skin/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="blue/css/960.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="blue/css/reset.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="blue/css/text.css" type="text/css" media="screen" />
+	<link rel="shortcut icon" href="blue/favicon.ico" />
+            <script language="javascript">AC_FL_RunContent = 0;</script>
+        <script language="javascript"> DetectFlashVer = 0; </script>
+        <script src="charts/AC_RunActiveContent.js" language="javascript"></script>
+        <script language="JavaScript" type="text/javascript">
+        <!--
+        var requiredMajorVersion = 10;
+        var requiredMinorVersion = 0;
+        var requiredRevision = 45;
+        -->
+        </script>
+    <style>
+.feature-keyword{font-weight:bold;}
+.feature-description{padding-left:15px;font-style:italic;background-color:beige;}
+.feature-role{font-weight:bold;}
+.feature-action{font-weight:bold;}
+.feature-value{font-weight:bold;}
+.feature-tags{padding-top:10px;padding-left:15px;color:darkblue;}
+.scenario-keyword{font-weight:bold;padding-left:15px;}
+.scenario-scenario_name{padding-left:15px;}
+.step-keyword{font-weight:bold;padding-left:50px;}
+.step-error-message{background-color:#FFEEEE;padding-left:50px;border: 1px solid #D88A8A;}
+.passed{background-color:#C5D88A;}
+.failed{background-color:#D88A8A;}
+.skipped{background-color:#2DEAEC;}
+.undefined{background-color: #ebcc81;}
+
+table.stats-table {
+	color:black;
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: white;
+}
+table.stats-table th {
+	color:black;
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: #66CCEE;
+	-moz-border-radius: ;
+}
+table.stats-table td {
+  color:black;
+  text-align: center;
+	border-width: 1px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: ;
+}
+</style>
+
+</head>
+<body id="top">
+	<div id="fullwidth_header">
+		<div class="container_12">
+			<h1 class="grid_4 logo"><a href="feature-overview.html" class='ie6fix'>Cucumber</a></h1>
+			<div class="grid_6" id="nav">
+				<ul>
+                    				<li><a href="tag-overview.html">Tag Overview</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="fullwidth_gradient">
+		<div class="container_12">
+			<div class="grid_9 heading">
+				<h2 id="overview-title">Feature Overview for Build: 1</h2>
+				<span class="subhead">The following graph shows passing and failing statistics for features in this build:</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container_12">
+		<div class="grid_12">
+
+
+	 <div id="flash-charts" style="text-align:center;">
+
+         <table>
+             <tr>
+                 <td>
+         <script language="JavaScript" type="text/javascript">
+<!--
+if (AC_FL_RunContent == 0 || DetectFlashVer == 0) {
+	alert("This page requires AC_RunActiveContent.js.");
+} else {
+	var hasRightVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
+	if(hasRightVersion) {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,45,2',
+			'width', '480',
+			'height', '300',
+			'scale', 'noscale',
+			'salign', 'TL',
+			'bgcolor', '#bbccff',
+			'wmode', 'opaque',
+			'movie', 'charts/charts',
+			'src', 'charts/charts',
+			'FlashVars', "library_path=charts/charts_library&xml_data=<chart><chart_data><row><null/><string>Passed</string><string>Failed</string><string>Skipped</string><string>Pending</string></row><row><string></string><number shadow='high' bevel='data' line_color='FFFFFF' line_thickness='3' line_alpha='75'>122</number><number shadow='high' bevel='data' line_color='FFFFFF' line_thickness='3' line_alpha='75'>0</number><number shadow='high' bevel='data' line_color='FFFFFF' line_thickness='3' line_alpha='75'>0</number><number shadow='high' bevel='data' line_color='FFFFFF' line_thickness='3' line_alpha='75'>0</number></row></chart_data><chart_label shadow='low' color='ffffff' alpha='95' size='15' position='inside' as_percentage='true' /><chart_pref select='true' /><chart_rect x='90' y='85' width='300' height='175' /><chart_transition type='scale' delay='1' duration='.5' order='category' /><chart_type>donut</chart_type><draw><text layer='foreground' color='2B3856' alpha='60' x='5' y='260' width='250' height='100' size='30'>Steps</text><rect transition='dissolve' layer='background' x='60' y='100' width='360' height='150' fill_alpha='0' line_color='ffffff' line_alpha='25' line_thickness='40' corner_tl='40' corner_tr='40' corner_br='40' corner_bl='40' /><circle transition='dissolve' layer='background' x='240' y='150' radius='150' fill_color='ccddff' fill_alpha='100' line_thickness='0' bevel='bg' blur='blur1' /><rect transition='dissolve' layer='background' shadow='soft' x='65' y='10' width='350' height='35' fill_color='ddeeff' fill_alpha='90' corner_tl='10' corner_tr='10' corner_br='10' corner_bl='10' /></draw><filter><shadow id='low' distance='2' angle='45' color='0' alpha='40' blurX='5' blurY='5' /><shadow id='high' distance='5' angle='45' color='0' alpha='40' blurX='10' blurY='10' /><shadow id='soft' distance='2' angle='45' color='0' alpha='20' blurX='5' blurY='5' /><bevel id='data' angle='45' blurX='5' blurY='5' distance='3' highlightAlpha='15' shadowAlpha='25' type='inner' /><bevel id='bg' angle='45' blurX='50' blurY='50' distance='10' highlightAlpha='35' shadowColor='0000ff' shadowAlpha='25' type='full' /><blur id='blur1' blurX='75' blurY='75' quality='1' /></filter><context_menu full_screen='false' /><legend transition='dissolve' x='90' width='330' bevel='low' fill_alpha='0' line_alpha='0' bullet='circle' size='12' color='000000' alpha='100' /><series_color><color>88dd11</color><color>cc1134</color><color>88aaff</color><color>FBB917</color></series_color><series_explode><number>25</number><number>0</number><number>0</number><number>0</number></series_explode><series transfer='true' /></chart>",
+			'id', 'my_chart',
+			'name', 'my_chart',
+			'menu', 'true',
+			'allowFullScreen', 'true',
+			'allowScriptAccess','sameDomain',
+			'quality', 'high',
+			'align', 'middle',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'play', 'true',
+			'devicefont', 'false'
+			);
+	} else {
+		var alternateContent = 'This content requires the Adobe Flash Player. '
+		+ '<u><a href=http://www.macromedia.com/go/getflash/>Get Flash</a></u>.';
+		document.write(alternateContent);
+	}
+}
+// -->
+</script>
+<noscript>
+	<P>This content requires JavaScript.</P>
+</noscript>
+ </td>
+ <td width="10">&nbsp;</td>
+                 <td>
+     <script language="JavaScript" type="text/javascript">
+   <!--
+   if (AC_FL_RunContent == 0 || DetectFlashVer == 0) {
+   	alert("This page requires AC_RunActiveContent.js.");
+   } else {
+   	var hasRightVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
+   	if(hasRightVersion) {
+   		AC_FL_RunContent(
+   			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,45,2',
+   			'width', '480',
+   			'height', '300',
+   			'scale', 'noscale',
+   			'salign', 'TL',
+   			'bgcolor', '#bbccff',
+   			'wmode', 'opaque',
+   			'movie', 'charts/charts',
+   			'src', 'charts/charts',
+   			'FlashVars', "library_path=charts/charts_library&xml_data=<chart><chart_data><row><null/><string>Passed</string><string>Failed</string></row><row><string></string><number shadow='high' bevel='data' line_color='FFFFFF' line_thickness='3' line_alpha='65'>21</number><number shadow='high'>0</number></row></chart_data><chart_grid_h alpha='10' color='ffffff' thickness='2' type='dotted' /><chart_label shadow='low' color='ffffff' alpha='95' size='30' position='inside' as_percentage='true'/><chart_rect x='100' y='50' width='300' height='210' positive_color='000000' positive_alpha='0' negative_color='ff0000' negative_alpha='0' /><chart_transition type='drop' delay='0' duration='3' order='all' /><chart_type>pie</chart_type><draw><rect shadow='bg' layer='background' x='0' y='0' width='480' height='300' fill_color='4c5577' fill_alpha='100' line_alpha='0' line_thickness='0' /><text shadow='high' transition='zoom' delay='1.5' duration='1' color='ffffff' alpha='90' size='30' x='5' y='260' width='250' height='100'>Scenarios</text></draw><filter><shadow id='high' distance='5' angle='45' color='0' alpha='50' blurX='10' blurY='10' /><shadow id='bg' inner='true' quality='2' distance='25' angle='-45' color='000000' alpha='35' blurX='100' blurY='100' /><bevel id='data' angle='45' blurX='30' blurY='30' distance='5' highlightAlpha='25' highlightColor='ffffff' shadowAlpha='40' type='inner' /></filter><context_menu full_screen='false' /><legend transition='dissolve' x='90' y='-90' width='330' bevel='low' fill_alpha='0' line_alpha='0' bullet='circle' size='12' color='ffffff' alpha='100' layout='horizontal'/><series_color><color>88dd11</color><color>cc1134</color></series_color><series_explode><number>20</number><number>30</number></series_explode></chart>",
+   			'id', 'my_chart',
+   			'name', 'my_chart',
+   			'menu', 'true',
+   			'allowFullScreen', 'true',
+   			'allowScriptAccess','sameDomain',
+   			'quality', 'high',
+   			'align', 'middle',
+   			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+   			'play', 'true',
+   			'devicefont', 'false'
+   			);
+   	} else {
+   		var alternateContent = 'This content requires the Adobe Flash Player. '
+   		+ '<u><a href=http://www.macromedia.com/go/getflash/>Get Flash</a></u>.';
+   		document.write(alternateContent);
+   	}
+   }
+   // -->
+   </script>
+   <noscript>
+   	<P>This content requires JavaScript.</P>
+   </noscript>
+
+ </td>
+ </tr>
+ </table>
+</div>
+	<br/>
+		<div class="grid_12 hr"></div>
+
+	<div>
+	  <br/>
+  <h2 id="feature-statistics-title">Feature Statistics</h2>
+  <table class="stats-table">
+  <tr>
+    <th></th>
+    <th id="stats-header-scenarios" colspan="3">Scenarios</th>
+    <th id="stats-header-steps" colspan="5">Steps</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+  <th id="stats-header-feature">Feature</th>
+  <th id="stats-header-scenarios-total">Total</th>
+  <th id="stats-header-scenarios-passed">Passed</th>
+  <th id="stats-header-scenarios-failed">Failed</th>
+  <th id="stats-header-steps-total">Total</th>
+  <th id="stats-header-steps-passed">Passed</th>
+  <th id="stats-header-steps-failed">Failed</th>
+  <th id="stats-header-steps-skipped">Skipped</th>
+  <th id="stats-header-steps-pending">Pending</th>
+  <th id="stats-header-duration">Duration</th>
+  <th id="stats-header-status">Status</th>
+  </tr>
+
+      
+                    
+          
+
+          
+          <tr>
+          <td style="text-align:left;"><a id="stats-Integration test of credentials-maven-plugin" href="github-genthaler-credentials-CredentialsMojoIT.feature.html">Integration test of credentials-maven-plugin</a></td>
+          <td id="stats-number-scenarios-Integration test of credentials-maven-plugin">8</td>
+          <td id="stats-number-scenarios-passed-Integration test of credentials-maven-plugin">8</td>
+          <td id="stats-number-scenarios-failed-Integration test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-Integration test of credentials-maven-plugin">41</td>
+          <td id="stats-number-steps-passed-Integration test of credentials-maven-plugin">41</td>
+          <td id="stats-number-steps-failed-Integration test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-skipped-Integration test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-pending-Integration test of credentials-maven-plugin">0</td>
+          <td id="stats-duration-Integration test of credentials-maven-plugin">34 secs and 758 ms</td>
+          <td id="stats-status-Integration test of credentials-maven-plugin" style="background-color: #C5D88A;">passed</td>
+          </tr>
+      
+                    
+          
+
+          
+          <tr>
+          <td style="text-align:left;"><a id="stats-Unit test of credentials-maven-plugin" href="github-genthaler-credentials-CredentialsMojoTest.feature.html">Unit test of credentials-maven-plugin</a></td>
+          <td id="stats-number-scenarios-Unit test of credentials-maven-plugin">13</td>
+          <td id="stats-number-scenarios-passed-Unit test of credentials-maven-plugin">13</td>
+          <td id="stats-number-scenarios-failed-Unit test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-Unit test of credentials-maven-plugin">81</td>
+          <td id="stats-number-steps-passed-Unit test of credentials-maven-plugin">81</td>
+          <td id="stats-number-steps-failed-Unit test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-skipped-Unit test of credentials-maven-plugin">0</td>
+          <td id="stats-number-steps-pending-Unit test of credentials-maven-plugin">0</td>
+          <td id="stats-duration-Unit test of credentials-maven-plugin">263 ms</td>
+          <td id="stats-status-Unit test of credentials-maven-plugin" style="background-color: #C5D88A;">passed</td>
+          </tr>
+      
+<tr>
+<td id="stats-total-features" style="background-color:lightgray;font-weight:bold;">2</td>
+<td id="stats-total-scenarios" style="background-color:lightgray;font-weight:bold;">21</td>
+<td id="stats-total-scenarios-passed" style="background-color:lightgray;font-weight:bold;">21</td>
+<td id="stats-total-scenarios-failed" style="background-color:lightgray;font-weight:bold;">0</td>
+<td id="stats-total-steps" style="background-color:lightgray;font-weight:bold;">122</td>
+<td id="stats-total-steps-passed" style="background-color:lightgray;font-weight:bold;">122</td>
+<td id="stats-total-steps-failed" style="background-color:lightgray;font-weight:bold;">0</td>
+<td id="stats-total-steps-skipped" style="background-color:lightgray;font-weight:bold;">0</td>
+<td id="stats-total-steps-pending" style="background-color:lightgray;font-weight:bold;">0</td>
+<td id="stats-total-duration" style="background-color:lightgray;font-weight:bold;">35 secs and 22 ms</td>
+<td id="stats-total-totals" style="background-color:lightgray;font-weight:bold;">Totals</td>
+</tr></table>
+	</div>
+
+	</div>
+	</div>
+
+
+	<div class="container_12">
+		<div class="grid_12 hr"></div>
+		<div class="grid_12 footer">
+			<p style="text-align:center;">Cucumber-JVM Jenkins Report Plugin - version: cucumber-reporting-0.0.20 - 14-08-2013 23:46:46</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Cucumber-JVM Html Reports - Tag Overview</title>
+    <link rel="stylesheet" href="blue/css/style.css" type="text/css"
+          media="screen"/>
+    <link rel="stylesheet" href="blue/css/skin/style.css" type="text/css"
+          media="screen"/>
+    <link rel="stylesheet" href="blue/css/960.css" type="text/css"
+          media="screen"/>
+    <link rel="stylesheet" href="blue/css/reset.css" type="text/css"
+          media="screen"/>
+    <link rel="stylesheet" href="blue/css/text.css" type="text/css"
+          media="screen"/>
+    <link rel="shortcut icon" href="blue/favicon.ico"/>
+
+               <script language="javascript">AC_FL_RunContent = 0;</script>
+           <script language="javascript"> DetectFlashVer = 0; </script>
+           <script src="charts/AC_RunActiveContent.js" language="javascript"></script>
+           <script language="JavaScript" type="text/javascript">
+           <!--
+           var requiredMajorVersion = 10;
+           var requiredMinorVersion = 0;
+           var requiredRevision = 45;
+           -->
+           </script>
+       
+    <style>
+        .feature-keyword {
+            font-weight: bold;
+        }
+
+        .feature-description {
+            padding-left: 15px;
+            font-style: italic;
+            background-color: beige;
+        }
+
+        .feature-role {
+            font-weight: bold;
+        }
+
+        .feature-action {
+            font-weight: bold;
+        }
+
+        .feature-value {
+            font-weight: bold;
+        }
+
+        .feature-tags {
+            padding-top: 10px;
+            padding-left: 15px;
+            color: darkblue;
+        }
+
+        .scenario-keyword {
+            font-weight: bold;
+            padding-left: 15px;
+        }
+
+        .scenario-scenario_name {
+            padding-left: 15px;
+        }
+
+        .step-keyword {
+            font-weight: bold;
+            padding-left: 50px;
+        }
+
+        .step-error-message {
+            background-color: #FFEEEE;
+            padding-left: 50px;
+            border: 1px solid #D88A8A;
+        }
+
+        .passed {
+            background-color: #C5D88A;
+        }
+
+        .failed {
+            background-color: #D88A8A;
+        }
+
+        .skipped {
+            background-color: #2DEAEC;
+        }
+
+        .undefined {
+            background-color: #ebcc81;
+        }
+
+        table.stats-table {
+            color: black;
+            border-width: 1px;
+            border-spacing: 2px;
+            border-style: outset;
+            border-color: gray;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        table.stats-table th {
+            color: black;
+            border-width: 1px;
+            padding: 5px;
+            border-style: inset;
+            border-color: gray;
+            background-color: #66CCEE;
+            -moz-border-radius:;
+        }
+
+        table.stats-table td {
+            color: black;
+            text-align: center;
+            border-width: 1px;
+            padding: 5px;
+            border-style: inset;
+            border-color: gray;
+            background-color: white;
+            -moz-border-radius:;
+        }
+
+        .graph {
+          margin-bottom: 50px;
+          margin-top: 30px;
+          clear: both;
+          font-family: georgia, serif;
+          font-size: 14px;
+        }
+
+        .graph-header h3 {
+          margin-bottom: 0px;
+        }
+        .graph-header {
+          text-align: center;
+        }
+        .graph-header p {
+          margin-top: 0px;
+        }
+
+        .graph .legend td, .graph .legend, .graph .legend tr {
+          padding: 0px;
+          margin: 0px;
+          border-collapse:collapse;
+        }
+
+        .graph .legend {
+          margin-left: 10px;
+        }
+        .graph .legend td {
+          padding-right: 5px;
+        }
+
+        .graph .legend .color-box {
+          width: 14px;
+          height: 10px;
+          overflow: hidden;
+        }
+    </style>
+
+     <style>
+         .graph .label {
+                  text-align: center;
+                  padding-top: 5px;
+                  padding-bottom: 5px;
+                    display: block;
+                position: absolute;
+                right: -5px;
+                top: 15px;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                }
+     </style>
+     <!--[if IE]>
+         <style>
+             .graph .label {
+                    text-align: center;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                      display: block;
+                  position: absolute;
+                  right: -5px;
+                  top: 15px;
+         		filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+         		right:-15px; top:5px;
+         	}
+         </style>
+         <![endif]-->
+
+</head>
+<body id="top">
+<div id="fullwidth_header">
+    <div class="container_12">
+        <h1 class="grid_4 logo"><a href="feature-overview.html" class='ie6fix'>Cucumber</a></h1>
+
+        <div class="grid_6" id="nav">
+            <ul>
+                                <li><a href="feature-overview.html">Feature Overview</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="fullwidth_gradient">
+    <div class="container_12">
+        <div class="grid_9 heading">
+            <h2>Tag Overview for Build: 1</h2>
+            <span class="subhead">The following graph shows number of steps passing, failing and skipped for this build:</span>
+        </div>
+    </div>
+</div>
+
+<div class="container_12">
+    <div class="grid_12">
+
+        
+                    <div style="text-align:center;"><script language="JavaScript" type="text/javascript">
+            <!--
+            if (AC_FL_RunContent == 0 || DetectFlashVer == 0) {
+                alert("This page requires AC_RunActiveContent.js.");
+            } else {
+                var hasRightVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
+                if(hasRightVersion) {
+                    AC_FL_RunContent(
+                            'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,45,2',
+                            'width', '600',
+                            'height', '350',
+                            'scale', 'noscale',
+                            'salign', 'TL',
+                            'bgcolor', '#777788',
+                            'wmode', 'opaque',
+                            'movie', 'charts/charts',
+                            'src', 'charts/charts',
+                            'FlashVars', "library_path=charts/charts_library&xml_data=<chart><axis_category shadow='low' size='10' color='FFFFFF' alpha='75' orientation='diagonal_down' /><axis_ticks value_ticks='true' category_ticks='true' minor_count='1' /><axis_value shadow='low' size='10' color='FFFFFF' alpha='75' /><chart_border top_thickness='0' bottom_thickness='2' left_thickness='2' right_thickness='0' /><chart_data><row><null/><string>@integration-test</string><string>@unit-test</string></row><row><string>Passed</string><number tooltip='41'>41</number><number tooltip='81'>81</number></row><row><string>Failed</string><number tooltip='0'>0</number><number tooltip='0'>0</number></row><row><string>Skipped</string><number tooltip='0'>0</number><number tooltip='0'>0</number></row><row><string>Pending</string><number tooltip='0'>0</number><number tooltip='0'>0</number></row></chart_data><chart_grid_h thickness='1' type='solid' /><chart_grid_v thickness='1' type='solid' /><chart_rect x='80' y='30' width='470' height='150' positive_color='888888' positive_alpha='50' /><chart_pref rotation_x='15' rotation_y='0' min_x='0' max_x='80' min_y='0' max_y='60' /><chart_type>stacked 3d column</chart_type><filter><shadow id='high' distance='5' angle='45' alpha='35' blurX='15' blurY='15' /><shadow id='low' distance='2' angle='45' alpha='50' blurX='5' blurY='5' /></filter><legend shadow='high' x='75' y='270' width='470' height='50' margin='20' fill_color='000000' fill_alpha='7' line_color='000000' line_alpha='0' line_thickness='0' layout='horizontal' size='12' color='000000' alpha='50' /><tooltip color='ffffcc' alpha='80' size='12' background_color_1='444488' background_alpha='75' shadow='low' /><series_color><color>C5D88A</color><color>D88A8A</color><color>2DEAEC</color><color>ebcc81</color></series_color><series bar_gap='0' set_gap='20' /></chart>",
+                            'id', 'my_chart',
+                            'name', 'my_chart',
+                            'menu', 'true',
+                            'allowFullScreen', 'true',
+                            'allowScriptAccess','sameDomain',
+                            'quality', 'high',
+                            'align', 'middle',
+                            'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                            'play', 'true',
+                            'devicefont', 'false'
+                    );
+                } else {
+                    var alternateContent = 'This content requires the Adobe Flash Player. '
+                            + '<u><a href=http://www.macromedia.com/go/getflash/>Get Flash</a></u>.';
+                    document.write(alternateContent);
+                }
+            }
+            // -->
+        </script>
+            <noscript>
+                <P>This content requires JavaScript.</P>
+            </noscript>
+        </div>
+                    <br/>
+
+        <div class="grid_12 hr"></div>
+
+        <div>
+            <br/>
+            <h2>Tag Statistics</h2>
+            <table class="stats-table">
+                <tr>
+                    <th></th>
+                    <th colspan="3">Scenarios</th>
+                    <th colspan="5">Steps</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Tag</th>
+                    <th>Total</th>
+                    <th>Passed</th>
+                    <th>Failed</th>
+                    <th>Total</th>
+                    <th>Passed</th>
+                    <th>Failed</th>
+                    <th>Skipped</th>
+                    <th>Pending</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                </tr>
+
+
+
+                
+                                        
+                    <tr>
+                        <td style="text-align:left;"><a href="integration-test.html">@integration-test</a></td>
+                        <td>8</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>41</td>
+                        <td>41</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>34 secs and 758 ms</td>
+                        <td style="background-color: #C5D88A;">passed</td>
+                    </tr>
+                
+                                        
+                    <tr>
+                        <td style="text-align:left;"><a href="unit-test.html">@unit-test</a></td>
+                        <td>13</td>
+                        <td>13</td>
+                        <td>0</td>
+                        <td>81</td>
+                        <td>81</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>263 ms</td>
+                        <td style="background-color: #C5D88A;">passed</td>
+                    </tr>
+                
+                <tr>
+                    <td style="background-color:lightgray;font-weight:bold;">2</td>
+                    <td style="background-color:lightgray;font-weight:bold;">21</td>
+                    <td style="background-color:lightgray;font-weight:bold;">21</td>
+                    <td style="background-color:lightgray;font-weight:bold;">0</td>
+                    <td style="background-color:lightgray;font-weight:bold;">122</td>
+                    <td style="background-color:lightgray;font-weight:bold;">122</td>
+                    <td style="background-color:lightgray;font-weight:bold;">0</td>
+                    <td style="background-color:lightgray;font-weight:bold;">0</td>
+                    <td style="background-color:lightgray;font-weight:bold;">0</td>
+                    <td style="background-color:lightgray;font-weight:bold;">35 secs and 22 ms</td>
+                    <td style="background-color:lightgray;font-weight:bold;">Totals</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+        
+<div class="container_12">
+    <div class="grid_12 hr"></div>
+    <div class="grid_12 footer">
+        <p style="text-align:center;">Cucumber-JVM Jenkins Report Plugin - version: cucumber-reporting-0.0.20 - 14-08-2013 23:46:46</p>
+    </div>
+</div>
+<div class="clear"></div>
+</body>
+</html>
