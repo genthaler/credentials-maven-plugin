@@ -20,12 +20,13 @@ package com.github.genthaler.credentials;
  * #L%
  */
 
-import org.junit.runner.RunWith;
+import junit.framework.TestCase;
 
-import cucumber.api.junit.Cucumber;
+public class CredentialsTest extends TestCase {
 
-@RunWith(Cucumber.class)
-@Cucumber.Options(tags = { "@unit-test,@integration-test" }, format = {
-		"progress", "json:target/cucumber.json" })
-public class CredentialsMojoIT {
+	public void testCredentials() throws Exception {
+		System.out.println(System.getProperties().toString());
+		assertEquals("you", System.getProperty("username"));
+		assertEquals("yours", System.getProperty("password"));
+	}
 }

@@ -1,4 +1,5 @@
-Feature: Exercise credentials 
+@unit-test 
+Feature: Unit test of credentials-maven-plugin 
 	In order to expose username and password properties 
 	As a Maven developer
 	I want to execute a credentials maven plugin which will populate them from server settings or command line properties
@@ -58,6 +59,44 @@ Scenario: settingsKey only with corresponding settings
 	Then the Project should have a blah.username property with value whiz 
 	And the Project should have a blah.password property with value bang 
 	
+Scenario: settingsKey only with corresponding settings and encrypted password 
+
+	Given the Mojo settingsKey property is blah 
+	And the Server id property is blah 
+	And the Server username property is me 
+	And the Server password property is {iFtD2TFFjzoHEDN1RxW21zEBYW0Gt7GwbsOm6yDS63s=} 
+	And the System settings.security property is src/it/ant-secure/settings-security.xml 
+	When the Mojo is executed 
+	Then the Project should have a blah.username property with value me 
+	And the Project should have a blah.password property with value mine 
+	
+Scenario: settingsKey only with corresponding settings and encrypted password but no decryption key 
+
+	Given the Mojo settingsKey property is blah 
+	And the Server id property is blah 
+	And the Server username property is me 
+	And the Server password property is {iFtD2TFFjzoHEDN1RxW21zEBYW0Gt7GwbsOm6yDS63s=} 
+	When the Mojo is executed 
+	Then the Project should have a blah.username property with value me 
+	And the Project should have a blah.password property with value {iFtD2TFFjzoHEDN1RxW21zEBYW0Gt7GwbsOm6yDS63s=} 
+	
+Scenario: settingsKey only with SSH style server entry i.e. no username or password 
+
+	Given the Mojo settingsKey property is blah 
+	And the Server id property is blah 
+	When the Mojo is executed 
+	Then the Project should have a blah.username property with value "" 
+	And the Project should have a blah.password property with value "" 
+	
+Scenario: settingsKey only with server entry with username but no password 
+
+	Given the Mojo settingsKey property is blah 
+	And the Server id property is blah 
+	And the Server username property is me 
+	When the Mojo is executed 
+	Then the Project should have a blah.username property with value me 
+	And the Project should have a blah.password property with value "" 
+	
 Scenario: settingsKey only with corresponding settings and using System properties 
 
 	Given the Mojo settingsKey property is blah 
@@ -71,7 +110,7 @@ Scenario: settingsKey only with corresponding settings and using System properti
 	And the System should have a blah.username property with value whiz 
 	And the System should have a blah.password property with value bang 
 	
-Scenario: usernameProperty & passwordProperty & settingsKey with corresponding settings AND previously existing properties, the existing properties should win 
+Scenario: usernameProperty & passwordProperty & settingsKey with corresponding settings AND	previously existing properties, the existing properties should win 
 
 	Given the Mojo usernameProperty property is foo 
 	And the Mojo passwordProperty property is bar 
