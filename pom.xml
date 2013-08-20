@@ -2,6 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>com.github.genthaler</groupId>
 	<artifactId>credentials-maven-plugin</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -65,24 +70,6 @@
 			</notifier>
 		</notifiers>
 	</ciManagement>
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub ${project.artifactId} Repository</name>
-			<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
-		</repository>
-		<snapshotRepository>
-			<id>github</id>
-			<name>GitHub ${project.artifactId} Repository</name>
-			<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
-		</snapshotRepository>
-		<site>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>http://genthaler.github.com/${project.artifactId}/</url>
-		</site>
-		<downloadUrl>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo/com/github/genthaler/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</downloadUrl>
-	</distributionManagement>
 	<properties>
 		<ant.version>1.9.1</ant.version>
 		<cucumber.version>1.1.4</cucumber.version>
@@ -246,6 +233,25 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-module-markdown</artifactId>
+							<version>1.4</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -291,16 +297,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.1</version>
-				<configuration>
-					<arguments>-Pgpg</arguments>
-					<releaseProfiles>gpg</releaseProfiles>
-					<mavenExecutorId>forked-path</mavenExecutorId>
-				</configuration>
-			</plugin>
-			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<version>3.2</version>
 				<executions>
@@ -321,66 +317,6 @@
 				<configuration>
 					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.github.github</groupId>
-				<artifactId>downloads-maven-plugin</artifactId>
-				<version>0.5</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.github.github</groupId>
-				<artifactId>site-maven-plugin</artifactId>
-				<version>0.8</version>
-				<executions>
-					<execution>
-						<id>site</id>
-						<phase>site-deploy</phase>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<configuration>
-							<message>Creating site for ${project.version}</message>
-						</configuration>
-					</execution>
-					<execution>
-						<id>repo</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<configuration>
-							<message>Maven artifacts for ${project.version}</message>
-							<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-							<branch>refs/heads/mvn-repo</branch>
-							<merge>true</merge>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.google.code.sortpom</groupId>
-				<artifactId>maven-sortpom-plugin</artifactId>
-				<version>2.1.0</version>
-				<executions>
-					<execution>
-						<id>sort</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>sort</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<nrOfIndentSpace>-1</nrOfIndentSpace>
-					<sortProperties>true</sortProperties>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -492,53 +428,10 @@
 						<artifactId>doxia-module-markdown</artifactId>
 						<version>1.4</version>
 					</dependency>
-					<!-- <dependency> -->
-					<!-- <groupId>lt.velykis.maven.skins</groupId> -->
-					<!-- <artifactId>reflow-velocity-tools</artifactId> -->
-					<!-- <version>1.0.0</version> -->
-					<!-- </dependency> -->
-					<!-- Reflow skin requires Velocity >= 1.7 -->
-					<!-- <dependency> -->
-					<!-- <groupId>org.apache.velocity</groupId> -->
-					<!-- <artifactId>velocity</artifactId> -->
-					<!-- <version>1.7</version> -->
-					<!-- </dependency> -->
 				</dependencies>
 				<configuration>
 					<skipDeploy>true</skipDeploy>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-							<goal>test-jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>javadoc</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>clirr-maven-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-report-plugin</artifactId>
@@ -556,34 +449,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <artifactId>maven-dependency-plugin</artifactId> -->
-			<!-- <version>2.8</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>default-pre-integration-test</id> -->
-			<!-- <phase>pre-integration-test</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>copy</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
-			<!-- <artifactItems> -->
-			<!-- <artifactItem> -->
-			<!-- <groupId>com.alexecollins.maven.plugin</groupId> -->
-			<!-- <artifactId>script-maven-plugin</artifactId> -->
-			<!-- <version>1.0.0</version> -->
-			<!-- </artifactItem> -->
-			<!-- <artifactItem> -->
-			<!-- <groupId>org.beanshell</groupId> -->
-			<!-- <artifactId>bsh</artifactId> -->
-			<!-- <version>2.0b5</version> -->
-			<!-- </artifactItem> -->
-			<!-- </artifactItems> -->
-			<!-- <localRepositoryDirectory>${localRepositoryPath}</localRepositoryDirectory> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
@@ -696,11 +561,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>clirr-maven-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-			<plugin>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.0.1</version>
 			</plugin>
@@ -715,30 +575,108 @@
 					<effort>Max</effort>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>net.masterthought</groupId>
-				<artifactId>maven-cucumber-reporting</artifactId>
-			</plugin>
 		</plugins>
 	</reporting>
 	<profiles>
 		<profile>
-			<id>gpg</id>
+			<id>github</id>
+			<distributionManagement>
+				<repository>
+					<id>github</id>
+					<name>GitHub ${project.artifactId} Repository</name>
+					<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
+				</repository>
+				<snapshotRepository>
+					<id>github</id>
+					<name>GitHub ${project.artifactId} Repository</name>
+					<url>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo</url>
+				</snapshotRepository>
+				<site>
+					<id>github</id>
+					<name>GitHub</name>
+					<url>http://genthaler.github.io/${project.artifactId}/</url>
+				</site>
+				<downloadUrl>https://raw.github.com/genthaler/${project.artifactId}/mvn-repo/com/github/genthaler/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</downloadUrl>
+			</distributionManagement>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.4</version>
+						<groupId>com.github.github</groupId>
+						<artifactId>downloads-maven-plugin</artifactId>
+						<version>0.5</version>
+					</plugin>
+					<plugin>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>com.github.github</groupId>
+						<artifactId>site-maven-plugin</artifactId>
+						<version>0.8</version>
 						<executions>
 							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
+								<id>site</id>
+								<phase>site-deploy</phase>
 								<goals>
-									<goal>sign</goal>
+									<goal>site</goal>
+								</goals>
+								<configuration>
+									<message>Creating site for ${project.version}</message>
+								</configuration>
+							</execution>
+							<execution>
+								<id>repo</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>site</goal>
+								</goals>
+								<configuration>
+									<message>Maven artifacts for ${project.version}</message>
+									<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+									<branch>refs/heads/mvn-repo</branch>
+									<merge>true</merge>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-site-plugin</artifactId>
+						<configuration>
+							<skipDeploy>true</skipDeploy>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>m2e</id>
+			<!-- This profile is only activated when building in Eclipse with m2e -->
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.code.sortpom</groupId>
+						<artifactId>maven-sortpom-plugin</artifactId>
+						<version>2.1.0</version>
+						<executions>
+							<execution>
+								<id>sort</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>sort</goal>
 								</goals>
 							</execution>
 						</executions>
+						<configuration>
+							<nrOfIndentSpace>-1</nrOfIndentSpace>
+							<sortProperties>true</sortProperties>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
