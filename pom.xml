@@ -284,7 +284,7 @@
 				<plugin>
 					<groupId>com.github.github</groupId>
 					<artifactId>site-maven-plugin</artifactId>
-					<version>0.8</version>
+					<version>0.10</version>
 				</plugin>
 				<plugin>
 					<groupId>com.google.code.sortpom</groupId>
@@ -692,10 +692,6 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>com.github.github</groupId>
-						<artifactId>downloads-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
 						<artifactId>maven-deploy-plugin</artifactId>
 						<configuration>
 							<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
@@ -729,6 +725,9 @@
 								</configuration>
 							</execution>
 						</executions>
+						<configuration>
+							<server>github</server>
+						</configuration>
 					</plugin>
 					<plugin>
 						<artifactId>maven-site-plugin</artifactId>
