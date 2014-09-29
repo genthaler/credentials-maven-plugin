@@ -4,7 +4,7 @@ package com.github.genthaler.credentials;
  * #%L
  * Credentials Maven Plugin
  * %%
- * Copyright (C) 2013 Günther Enthaler
+ * Copyright (C) 2013 - 2014 Günther Enthaler
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,12 @@ package com.github.genthaler.credentials;
  * #L%
  */
 
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
-import org.apache.maven.settings.Settings;
-import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
@@ -46,13 +40,10 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  * If the computed {@link #usernameProperty} and/or {@link #passwordProperty}
  * already exist as either Maven or system properties, neither will be looked up
  * in <code>~/.m2/settings.xml</code>, since it's assumed that these have been
- * deliberately set in order to override the <code>pom.xml</code> settings.
+ * deliberately set in order to override the <code>settings.xml</code> settings.
  */
-@Mojo(name = "set", requiresProject = false, defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true, requiresDirectInvocation = false)
-public class CredentialsMojo extends AbstractMojo {
-
-	private static final String DEFAULT_USERNAME_PROPERTY_SUFFIX = "username";
-	private static final String DEFAULT_PASSWORD_PROPERTY_SUFFIX = "password";
+@Mojo(name = "set", requiresProject = true, defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true, requiresDirectInvocation = false)
+public class SetMojo extends AbstractCredentialsMojo {
 
 	/**
 	 * Property to which the username will be set. If not given, it will be set
@@ -70,35 +61,11 @@ public class CredentialsMojo extends AbstractMojo {
 	private String passwordProperty;
 
 	/**
-	 * Whether to set system properties (as well as the default Maven project
-	 * properties). This is to support situations where it's not possible or
-	 * convenient to propagate Maven properties. An example is the <a
-	 * href="maven.apache.org/plugins/maven-antrun-plugin">Maven AntRun
-	 * Plugin</a>, where only certain Maven properties are propagated into the
-	 * Ant project context.
-	 */
-	@Parameter(property = "credentials.useSystemProperties", required = false)
-	private boolean useSystemProperties;
-
-	/**
 	 * Server <code>id</code> in <code>~/.m2/settings.xml</code> to look up
 	 * username/password credentials.
 	 */
 	@Parameter(property = "credentials.settingsKey", required = false)
 	private String settingsKey;
-
-	@Parameter(readonly = true, required = true, property = "settings")
-	private Settings settings;
-
-	@Parameter(required = true)
-	@Component(hint = "mojo")
-	private SecDispatcher securityDispatcher;
-
-	@Parameter(readonly = true, required = true, defaultValue = "${project}")
-	private MavenProject project;
-
-	@Parameter(readonly = true, required = true, defaultValue = "${session}")
-	private MavenSession mavenSession;
 
 	/**
 	 * Execute the mojo.
@@ -199,13 +166,5 @@ public class CredentialsMojo extends AbstractMojo {
 		if (debugEnabled)
 			log.debug(String.format("password property '%s' is '%s'",
 					passwordProperty, password));
-	}
-
-	private static String coalesce(String... values) {
-		for (String value : values) {
-			if (null != value)
-				return value;
-		}
-		return null;
 	}
 }

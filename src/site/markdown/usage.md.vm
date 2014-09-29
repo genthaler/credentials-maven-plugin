@@ -1,15 +1,45 @@
 Usage
 -----
 
-Just a short word on encrypted credentials, it looks like if you want to encrypt some of your credentials you have to encrypt them all i.e. it's all or nothing.
+Just a short word on encrypted credentials, it looks like if you want to encrypt some of your credentials you have to encrypt them all i.e. it&apos;s all or nothing.
 
-For an idea of how to use this plugin, it's instructive to look at some of the [integration tests](${project.scm.url}/tags/${project.version}/src/it).
+For an idea of how to use this plugin, it&apos;s instructive to look at some of the [integration tests](${project.scm.url}/tree/${project.artifactId}-${project.version}/src/it).
 
-In many cases, you want to enable the setting of system properties; it's the only way to get properties into JUnit tests (unless you don't fork) or the [Antrun Maven Plugin](maven.apache.org/plugins/maven-antrun-plugin).
-	
-If you want to override particular credentials, simply define the properties that this plugin would have defined on the command line using the -D switch. The [Credentials Maven Plugin](/) won't try to re-set these properties.
+In many cases, you want to enable the setting of system properties; it&apos;s the only way to get properties into JUnit tests (unless you don&apos;t fork) or the [Antrun Maven Plugin](maven.apache.org/plugins/maven-antrun-plugin).
 
-The execution of this plugin's goal can be bound to a phase of the build lifecycle, usually the validate phase.
+If you want to override particular credentials, simply define the properties that this plugin would have defined on the command line using the -D switch. The [Credentials Maven Plugin](/) won&apos;t try to re-set these properties.
+
+The execution of this plugin&apos;s goal can be bound to a phase of the build lifecycle, usually the validate phase.
+
+The simplest way of configuring the ${project.artifactId} is as follows
+	<project>
+	  [...]
+	  <build>
+	    <plugins>
+	      <plugin>
+	        <groupId>com.github.genthaler</groupId>
+	        <artifactId>credentials-maven-plugin</artifactId>
+	        <version>${project.version}</version>
+	        <executions>
+	          <execution>
+	            <id>set-all</id>
+	            <goals>
+	              <goal>set-all</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	      </plugin>
+	      [...]
+	    </plugins>
+	    [...]
+	  </build>
+	  [...]
+	</project>
+
+See the documentation of the [credentials:set-all](./set-all-mojo.html) goal for more details.
+
+
+Here's an example of setting specific properties.
 
 	<project>
 	  [...]
@@ -21,7 +51,7 @@ The execution of this plugin's goal can be bound to a phase of the build lifecyc
 	        <groupId>com.github.genthaler</groupId>
 	        <artifactId>credentials-maven-plugin</artifactId>
 	        <version>${project.version}</version>
-	
+
 	        <!-- common configuration shared by all executions -->
 	        <configuration>
 				<useSystemProperties>true</useSystemProperties>
@@ -29,13 +59,13 @@ The execution of this plugin's goal can be bound to a phase of the build lifecyc
 	        </configuration>
 	        <executions>
 	          <execution>
-	            <phase></phase>
+	            <id>set</id>
+	            <phase>validate</phase>
 	            <goals>
 	              <goal>execute</goal>
 	            </goals>
 	            <!-- specific configuration for this execution -->
 	            <configuration>
-	              <!-- specify your credentials sources -->
 					<usernameProperty>username</usernameProperty>
 					<passwordProperty>password</passwordProperty>
 					<settingsKey>my.server</settingsKey>
@@ -54,3 +84,5 @@ The execution of this plugin's goal can be bound to a phase of the build lifecyc
 	  </build>
 	  [...]
 	</project>
+
+See the documentation of the [credentials:set](./set-mojo.html) goal for more details.

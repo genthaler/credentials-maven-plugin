@@ -4,7 +4,7 @@ package com.github.genthaler.credentials;
  * #%L
  * Credentials Maven Plugin
  * %%
- * Copyright (C) 2013 Günther Enthaler
+ * Copyright (C) 2013 - 2014 Günther Enthaler
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ package com.github.genthaler.credentials;
 
 import org.junit.runner.RunWith;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(tags = { "@unit-test,@integration-test" }, format = {
-		"progress", "json:target/cucumber.json" })
-public class CredentialsMojoIT {
+@CucumberOptions(tags = { "@unit-test" }, format = { "pretty" })
+public class MojoTest {
 }

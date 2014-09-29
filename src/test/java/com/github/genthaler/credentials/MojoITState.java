@@ -4,7 +4,7 @@ package com.github.genthaler.credentials;
  * #%L
  * Credentials Maven Plugin
  * %%
- * Copyright (C) 2013 Günther Enthaler
+ * Copyright (C) 2013 - 2014 Günther Enthaler
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,26 +41,14 @@ import org.apache.maven.shared.utils.WriterFactory;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
-/*
- * Copyright 2006 The Codehaus
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 /**
- * Unit test for CredentialsMojo.
+ * Unit test for SetMojo.
  */
-public class CredentialsMojoITState {
+public class MojoITState {
 
-	private int folder = 0;
+	static final String SCRIPT_GROUP_ID = "com.alexecollins.maven.plugin";
+	static final String SCRIPT_ARTIFACT_ID = "script-maven-plugin";
+	static final String SCRIPT_VERSION = "1.0.0";
 	private String groupId;
 	private String artifactId;
 	private String version;
@@ -73,12 +61,11 @@ public class CredentialsMojoITState {
 	private Plugin credentialsPlugin;
 	private Model projectModel;
 
-	public CredentialsMojoITState() throws IOException, XmlPullParserException {
+	public MojoITState(int folder) throws IOException, XmlPullParserException {
 		super();
 		extractCurrentModel();
 		extractCurrentSettings();
 		createModel();
-		folder++;
 		execDir = FileUtils.getFile(getBasedir(), "target", "it2",
 				Integer.toString(folder));
 
@@ -120,11 +107,12 @@ public class CredentialsMojoITState {
 		settings.getServers().clear();
 		settings.getPluginGroups().add(groupId);
 		for (Profile profile : settings.getProfiles()) {
-			for (Repository repository : profile.getRepositories()) {
-				if ("@localRepositoryUrl@"
-						.equalsIgnoreCase(repository.getUrl()))
-					repository.setUrl(localRepository.getAbsolutePath());
-			}
+			for (Repository repository : profile.getRepositories())
+				if ("local.central".equals(repository.getId()))
+					repository.setUrl(localRepository.toURI().toString());
+			for (Repository repository : profile.getPluginRepositories())
+				if ("local.central".equals(repository.getId()))
+					repository.setUrl(localRepository.toURI().toString());
 		}
 	}
 
@@ -156,9 +144,9 @@ public class CredentialsMojoITState {
 	@SuppressWarnings("serial")
 	public Plugin createScriptPlugin() {
 		Plugin plugin = new Plugin();
-		plugin.setGroupId("com.alexecollins.maven.plugin");
-		plugin.setArtifactId("script-maven-plugin");
-		plugin.setVersion("1.0.0");
+		plugin.setGroupId(SCRIPT_GROUP_ID);
+		plugin.setArtifactId(SCRIPT_ARTIFACT_ID);
+		plugin.setVersion(SCRIPT_VERSION);
 		Xpp3Dom config = new Xpp3Dom("configuration") {
 			{
 				addChild(new Xpp3Dom("script") {

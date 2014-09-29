@@ -1,0 +1,35 @@
+Executions
+----------
+
+The following configuration shows how to have all credentials from your `~/.m2/settings.xml` exposed as Maven project and System properties.
+
+You can then use these credentials in your pom e.g. in a Jetty JNDI definition, or as a system property in a unit test.
+
+	<project>
+	  [...]
+	  <build>
+	    [...]
+	    <plugins>
+	      <plugin>
+	        <groupId>com.github.genthaler</groupId>
+	        <artifactId>credentials-maven-plugin</artifactId>
+	        <version>${project.version}</version>
+	        <executions>
+	          <execution>
+	            <phase>validate</phase>
+	            <goals>
+	              <goal>set-all</goal>
+	            </goals>
+	            <configuration>
+				  <useSystemProperties>true</useSystemProperties>
+	            </configuration>
+	          </execution>
+	        </executions>
+	      </plugin>
+	      [...]
+	    </plugins>
+	    [...]
+	  </build>
+	  [...]
+	</project>
+

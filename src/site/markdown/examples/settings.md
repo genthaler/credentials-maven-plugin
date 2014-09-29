@@ -21,6 +21,6 @@ Encrypted passwords
 
 It's also possible to use encrypted passwords. Follow the instructions in the [encryption mini guide](http://maven.apache.org/guides/mini/guide-encryption.html).
 Just like unencrypted passwords you have to be sure to set the `settingsKey`.
-  
-If the password can be decypted the plugin will do so, otherwise the raw password will be returned.
-   
+
+If the password can be decypted the plugin will do so, otherwise the encrypted password will be returned.
+

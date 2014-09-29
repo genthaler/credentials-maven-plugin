@@ -4,7 +4,7 @@ package com.github.genthaler.credentials;
  * #%L
  * Credentials Maven Plugin
  * %%
- * Copyright (C) 2013 Günther Enthaler
+ * Copyright (C) 2013 - 2014 Günther Enthaler
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import junit.framework.AssertionFailedError;
+
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
@@ -39,22 +42,30 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Unit test for CredentialsMojo.
+ * Unit test for SetMojo.
  */
-public class CredentialsMojoTestSteps extends AbstractMojoTestCase {
-	private CredentialsMojo mojo;
+public class MojoTestSteps extends AbstractMojoTestCase {
+	private AbstractCredentialsMojo mojo;
 	private MavenProjectStub project;
 	private Settings settings;
-	private Server server;
 	private Properties properties;
 	private Throwable thrown = null;
 	private List<String> systemProperties;
 
+	@Before(value = { "@set" }, order = 1)
+	public void setUpSetMojo() {
+		mojo = new SetMojo();
+	}
+
+	@Before(value = { "@set-all" }, order = 1)
+	public void setUpSetAllMojo() {
+		mojo = new SetAllMojo();
+	}
+
 	@Override
-	@Before
+	@Before(order = 2)
 	public void setUp() throws Exception {
 		super.setUp();
-		mojo = new CredentialsMojo();
 		SecDispatcher securityDispatcher = (SecDispatcher) lookup(
 				"org.sonatype.plexus.components.sec.dispatcher.SecDispatcher",
 				"default");
@@ -70,8 +81,6 @@ public class CredentialsMojoTestSteps extends AbstractMojoTestCase {
 		setVariableValueToObject(mojo, "project", project);
 
 		settings = new Settings();
-		server = new Server();
-		settings.addServer(server);
 		setVariableValueToObject(mojo, "settings", settings);
 		systemProperties = new ArrayList<String>();
 
@@ -83,11 +92,11 @@ public class CredentialsMojoTestSteps extends AbstractMojoTestCase {
 		});
 	}
 
-	@Given("^an empty Mojo$")
-	public void emptyMojo() {
+	@Given("^a (Set\\w*Mojo) Mojo$")
+	public void emptyMojo(String className) {
 	}
 
-	@Given("^the Mojo (.*) property is (.*)$")
+	@Given("^the Mojo's (.*) property is (.*)$")
 	public void setMojoProperty(String property, String value)
 			throws IllegalAccessException {
 		if ("useSystemProperties".equalsIgnoreCase(property))
@@ -97,19 +106,36 @@ public class CredentialsMojoTestSteps extends AbstractMojoTestCase {
 			setVariableValueToObject(mojo, property, value);
 	}
 
-	@Given("^the Server (.*) property is (.*)$")
-	public void setServerProperty(String property, String value)
+	@Given("^Server (.*)'s (.*) property is (.*)$")
+	public void setServerProperty(String serverId, String property, String value)
 			throws IllegalAccessException {
+		Server server = settings.getServer(serverId);
+		if (server == null) {
+			server = new Server();
+			server.setId(serverId);
+			settings.addServer(server);
+		}
 		setVariableValueToObject(server, property, value);
 	}
 
-	@Given("^the Project (.*) property is (.*)$")
+	@Given("^an empty Server with id (.*)$")
+	public void addEmptyServer(String serverId) throws IllegalAccessException {
+		Server server = settings.getServer(serverId);
+		if (server != null)
+			throw new AssertionFailedError(String.format(
+					"There's already a server with ID %s", serverId));
+		server = new Server();
+		settings.addServer(server);
+		setVariableValueToObject(server, "id", serverId);
+	}
+
+	@Given("^the Project's (.*) property is (.*)$")
 	public void setProjectProperty(String property, String value)
 			throws IllegalAccessException {
 		properties.setProperty(property, value);
 	}
 
-	@Given("^the System (.*) property is (.*)$")
+	@Given("^the (.*) System property is (.*)$")
 	public void setSystemProperty(String property, String value)
 			throws IllegalAccessException {
 		systemProperties.add(property);
@@ -121,6 +147,8 @@ public class CredentialsMojoTestSteps extends AbstractMojoTestCase {
 		try {
 			mojo.execute();
 		} catch (MojoExecutionException e) {
+			thrown = e;
+		} catch (MojoFailureException e) {
 			thrown = e;
 		}
 	}

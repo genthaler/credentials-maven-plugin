@@ -4,7 +4,7 @@ package com.github.genthaler.credentials;
  * #%L
  * Credentials Maven Plugin
  * %%
- * Copyright (C) 2013 Günther Enthaler
+ * Copyright (C) 2013 - 2014 Günther Enthaler
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,37 +39,26 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-/*
- * Copyright 2006 The Codehaus
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 /**
- * Unit test for CredentialsMojo.
+ * Integration test for SetMojo and SetAllMojo.
  */
-public class CredentialsMojoITSteps {
+public class MojoITSteps {
 
-	private Throwable thrown;
-	private CredentialsMojoITState state;
+	private Throwable thrown = null;
+	private MojoITState state;
 	private Verifier verifier;
+	private static int folder = 0;
 
 	@Before
 	public void setUp() throws VerificationException, IOException,
 			XmlPullParserException {
-		state = new CredentialsMojoITState();
+		state = new MojoITState(folder++);
 
 		verifier = new Verifier(state.getExecDir().getAbsolutePath());
 		verifier.setLocalRepo(state.getLocalRepository().getAbsolutePath());
 		verifier.setAutoclean(false);
+		// verifier.setForkJvm(false);
+		thrown = null;
 	}
 
 	@Given("^no credentials plugin configuration$")
@@ -105,15 +94,19 @@ public class CredentialsMojoITSteps {
 		verifier.setSystemProperty(property, value);
 	}
 
-	@When("^the project is executed")
-	public void executeMojo() throws VerificationException, IOException {
+	@When("^the (.*) goal is executed")
+	public void executeMojo(String goal) throws VerificationException,
+			IOException {
 		try {
 			state.writeState();
 			verifier.addCliOption(String.format("-s %s", state
 					.getSettingsFile().getAbsolutePath()));
 
-			verifier.executeGoals(Arrays.asList("credentials:set",
-					"script:execute"));
+			verifier.executeGoals(Arrays.asList(state.getGroupId() + ":"
+					+ state.getArtifactId() + ":" + state.getVersion() + ":"
+					+ goal, MojoITState.SCRIPT_GROUP_ID + ":"
+					+ MojoITState.SCRIPT_ARTIFACT_ID + ":"
+					+ MojoITState.SCRIPT_VERSION + ":execute"));
 		} catch (VerificationException e) {
 			thrown = e;
 		} catch (IOException e) {
@@ -124,18 +117,21 @@ public class CredentialsMojoITSteps {
 	@Then("^there should have been a Project (.*) property with value (.*)$")
 	public void assertProjectProperty(String property, String value)
 			throws VerificationException {
+		assertThat("An exception was thrown", thrown, nullValue());
 		verifier.verifyTextInLog("project." + property + "=" + value);
 	}
 
 	@Then("^there should have been a System (.*) property with value (.*)$")
 	public void assertSystemProperty(String property, String value)
 			throws VerificationException {
+		assertThat("An exception was thrown", thrown, nullValue());
 		verifier.verifyTextInLog("system." + property + "=" + value);
 	}
 
 	@Then("^there should have been no errors$")
 	public void noErrors() throws VerificationException {
 		// try {
+		assertThat("An exception was thrown", thrown, nullValue());
 		verifier.verifyErrorFreeLog();
 		// } catch (VerificationException e) {
 		// e.printStackTrace();
