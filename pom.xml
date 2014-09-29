@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>oss-parent</artifactId>
@@ -697,6 +698,7 @@
 								</goals>
 								<configuration>
 									<message>Creating site for ${project.version}</message>
+									<server>github</server>
 								</configuration>
 							</execution>
 							<execution>
@@ -710,12 +712,10 @@
 									<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
 									<branch>refs/heads/mvn-repo</branch>
 									<merge>true</merge>
+									<server>github</server>
 								</configuration>
 							</execution>
 						</executions>
-						<configuration>
-							<server>github</server>
-						</configuration>
 					</plugin>
 					<plugin>
 						<artifactId>maven-site-plugin</artifactId>
