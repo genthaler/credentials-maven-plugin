@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>oss-parent</artifactId>
-		<groupId>org.sonatype.oss</groupId>
-		<version>9</version>
-	</parent>
 	<groupId>com.github.genthaler</groupId>
 	<artifactId>credentials-maven-plugin</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>Credentials Maven Plugin</name>
 	<description>Looks up credentials in settings.xml</description>
@@ -236,6 +230,17 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfiles>sonatype-oss-release`</releaseProfiles>
+						<goals>deploy site-deploy</goals>
+					</configuration>
+				</plugin>
+				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.3</version>
 					<dependencies>
@@ -265,7 +270,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9.1</version>
+					<version>2.10</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -527,6 +532,23 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>site</id>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<configuration>
+							<message>Creating site for ${project.version}</message>
+							<server>github</server>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -655,6 +677,68 @@
 	</reporting>
 	<profiles>
 		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<distributionManagement>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+		<profile>
 			<id>github</id>
 			<build>
 				<plugins>
@@ -690,17 +774,6 @@
 						<groupId>com.github.github</groupId>
 						<artifactId>site-maven-plugin</artifactId>
 						<executions>
-							<execution>
-								<id>site</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>site</goal>
-								</goals>
-								<configuration>
-									<message>Creating site for ${project.version}</message>
-									<server>github</server>
-								</configuration>
-							</execution>
 							<execution>
 								<id>repo</id>
 								<phase>deploy</phase>
