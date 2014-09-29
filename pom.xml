@@ -348,9 +348,6 @@
 				<plugin>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>1.5</version>
-					<configuration>
-						<useAgent>true</useAgent>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -712,6 +709,9 @@
 								<goals>
 									<goal>sign</goal>
 								</goals>
+								<configuration>
+									<useAgent>true</useAgent>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
