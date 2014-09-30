@@ -238,7 +238,7 @@
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<useReleaseProfile>false</useReleaseProfile>
 						<releaseProfiles>sonatype-oss-release</releaseProfiles>
-						<goals>deploy site-deploy</goals>
+						<goals>deploy site-deploy nexus-staging:release</goals>
 					</configuration>
 				</plugin>
 				<plugin>
