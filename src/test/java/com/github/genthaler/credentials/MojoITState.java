@@ -90,7 +90,7 @@ public class MojoITState {
 		projectModel = pomReader.read(ReaderFactory.newXmlReader(new File(
 				getBasedir(), "pom.xml")));
 
-		groupId = projectModel.getGroupId();
+		groupId = projectModel.getParent().getGroupId();
 		artifactId = projectModel.getArtifactId();
 		version = projectModel.getVersion();
 		target = new File(getBasedir(), "target");
