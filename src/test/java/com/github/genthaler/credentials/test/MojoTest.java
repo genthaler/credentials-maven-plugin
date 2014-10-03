@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.genthaler.credentials.test;
 
 /*
  * #%L
@@ -26,7 +26,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(tags = { "@integration-test, @unit-test" }, format = {
-		"progress", "json:target/cucumber.json" })
-public class MojoIT {
+@CucumberOptions(features = { "classpath:com/github/genthaler/credentials" }, tags = {
+		"@set", "@set-all" }, format = { "pretty", "json:target/cucumber.json",
+		"html:target/cucumber-test", "junit:target/cucumber_junit_test.xml" }, glue = { "com.github.genthaler.credentials.test" })
+public class MojoTest {
 }

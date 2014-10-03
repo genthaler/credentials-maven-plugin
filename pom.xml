@@ -111,6 +111,22 @@
 				<artifactId>maven-invoker-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>default-integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+							<settingsFile>src/it/settings-unencrypted.xml</settingsFile>
+							<pomIncludes>
+								<pomInclude>commandline-no-config</pomInclude>
+								<pomInclude>commandline-override-password</pomInclude>
+								<pomInclude>commandline-override-username-password</pomInclude>
+								<pomInclude>junit</pomInclude>
+								<pomInclude>set-all</pomInclude>
+							</pomIncludes>
+						</configuration>
+					</execution>
+					<execution>
 						<id>credentials-secure</id>
 						<goals>
 							<goal>integration-test</goal>
@@ -128,23 +144,18 @@
 							</testProperties>
 						</configuration>
 					</execution>
-					<execution>
-						<id>credentials-nonsecure</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-						<configuration>
-							<settingsFile>src/it/settings-unencrypted.xml</settingsFile>
-							<pomIncludes>
-								<pomInclude>commandline-no-config</pomInclude>
-								<pomInclude>commandline-override-password</pomInclude>
-								<pomInclude>commandline-override-username-password</pomInclude>
-								<pomInclude>junit</pomInclude>
-								<pomInclude>set-all</pomInclude>
-							</pomIncludes>
-						</configuration>
-					</execution>
 				</executions>
+				<configuration>
+					<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+					<cloneClean>false</cloneClean>
+					<debug>true</debug>
+					<filterProperties>
+						<sitePluginVersion>3.0</sitePluginVersion>
+						<ant.version>${ant.version}</ant.version>
+					</filterProperties>
+					<localRepositoryPath>${localRepositoryPath}</localRepositoryPath>
+					<showErrors>true</showErrors>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

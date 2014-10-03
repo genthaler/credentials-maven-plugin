@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.genthaler.credentials.test;
 
 /*
  * #%L
@@ -34,6 +34,10 @@ import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
+
+import com.github.genthaler.credentials.AbstractCredentialsMojo;
+import com.github.genthaler.credentials.SetAllMojo;
+import com.github.genthaler.credentials.SetMojo;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -92,11 +96,11 @@ public class MojoTestSteps extends AbstractMojoTestCase {
 		});
 	}
 
-	@Given("^a (Set\\w*Mojo) Mojo$")
-	public void emptyMojo(String className) {
+	@Given("^a (set.*) Plugin")
+	public void emptyMojo(String goal) {
 	}
 
-	@Given("^the Mojo's (.*) property is (.*)$")
+	@Given("^the Plugin (.*) property is (.*)$")
 	public void setMojoProperty(String property, String value)
 			throws IllegalAccessException {
 		if ("useSystemProperties".equalsIgnoreCase(property))
@@ -106,7 +110,7 @@ public class MojoTestSteps extends AbstractMojoTestCase {
 			setVariableValueToObject(mojo, property, value);
 	}
 
-	@Given("^Server (.*)'s (.*) property is (.*)$")
+	@Given("^Server (.*)'s (.*) is (.*)$")
 	public void setServerProperty(String serverId, String property, String value)
 			throws IllegalAccessException {
 		Server server = settings.getServer(serverId);
@@ -129,21 +133,21 @@ public class MojoTestSteps extends AbstractMojoTestCase {
 		setVariableValueToObject(server, "id", serverId);
 	}
 
-	@Given("^the Project's (.*) property is (.*)$")
+	@Given("^the Project (.*) property is (.*)$")
 	public void setProjectProperty(String property, String value)
 			throws IllegalAccessException {
 		properties.setProperty(property, value);
 	}
 
-	@Given("^the (.*) System property is (.*)$")
+	@Given("^the System (.*) property is (.*)$")
 	public void setSystemProperty(String property, String value)
 			throws IllegalAccessException {
 		systemProperties.add(property);
 		System.setProperty(property, value);
 	}
 
-	@When("^the Mojo is executed$")
-	public void executeMojo() {
+	@When("^the (.*) Goal is executed")
+	public void executeMojo(String goal) {
 		try {
 			mojo.execute();
 		} catch (MojoExecutionException e) {
@@ -153,21 +157,20 @@ public class MojoTestSteps extends AbstractMojoTestCase {
 		}
 	}
 
-	@Then("^the Project should have a (.*) property with value (.*)$")
+	@Then("^there should be a Project (.*) property with value (.*)$")
 	public void assertProjectProperty(String property, String value) {
 		if ("\"\"".equals(value))
 			value = "";
 		assertEquals(value, properties.getProperty(property));
 	}
 
-	@Then("^the System should have a (.*) property with value (.*)$")
+	@Then("^there should be a System (.*) property with value (.*)$")
 	public void assertSystemProperty(String property, String value) {
 		assertEquals(value, System.getProperty(property));
 	}
 
-	@Then("^a (.*) should be thrown with the message '(.*)'$")
-	public void anExceptionIsThrown(String exceptionClass, String message) {
-		assertEquals(exceptionClass, thrown.getClass().getSimpleName());
+	@Then("^there should be an error message '(.*)'$")
+	public void anExceptionIsThrown(String message) {
 		assertEquals(message, thrown.getMessage());
 	}
 

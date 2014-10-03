@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.genthaler.credentials.it;
 
 /*
  * #%L
@@ -57,19 +57,23 @@ public class MojoITSteps {
 		verifier = new Verifier(state.getExecDir().getAbsolutePath());
 		verifier.setLocalRepo(state.getLocalRepository().getAbsolutePath());
 		verifier.setAutoclean(false);
+		verifier.setDebug(true);
+		// verifier.setDebugJvm(true);
+		// verifier.setMavenDebug(true);
 		// verifier.setForkJvm(false);
 		thrown = null;
 	}
 
-	@Given("^no credentials plugin configuration$")
-	public void emptyMojo() {
+	@Given("^a (set.*) Plugin")
+	public void emptyMojo(String goal) {
 		state.getModel().getBuild().getPlugins()
 				.remove(state.getCredentialsPlugin());
 	}
 
 	@SuppressWarnings("serial")
-	@Given("^the credentials-maven-plugin (.*) property is (.*)$")
-	public void setMojoProperty(String property, final String propertyValue) {
+	@Given("^the Plugin (.*) property is (.*)$")
+	public void setMojoProperty(final String property,
+			final String propertyValue) {
 		Xpp3Dom configuration = (Xpp3Dom) state.getCredentialsPlugin()
 				.getConfiguration();
 		configuration.addChild(new Xpp3Dom(property) {
@@ -79,22 +83,33 @@ public class MojoITSteps {
 		});
 	}
 
-	@Given("^the (.*) Server username is (.*)$")
+	@Given("^an empty Server with id (.*)$")
+	public void addEmptyServer(String serverId) throws IllegalAccessException {
+		state.getServer(serverId);
+	}
+
+	@Given("^Server (.*)'s username is (.*)$")
 	public void setServerUsername(String id, String value) {
 		state.getServer(id).setUsername(value);
 	}
 
-	@Given("^the (.*) Server password is (.*)$")
+	@Given("^Server (.*)'s password is (.*)$")
 	public void setServerPassword(String id, String value) {
 		state.getServer(id).setPassword(value);
 	}
 
-	@Given("^the (.*) commandline property is (.*)$")
+	@Given("^the Project (.*) property is (.*)$")
+	public void setProjectProperty(String property, String value)
+			throws IllegalAccessException {
+		state.getProject().getProperties().setProperty(property, value);
+	}
+
+	@Given("^the System (.*) property is (.*)$")
 	public void setSystemProperty(String property, String value) {
 		verifier.setSystemProperty(property, value);
 	}
 
-	@When("^the (.*) goal is executed")
+	@When("^the (.*) Goal is executed")
 	public void executeMojo(String goal) throws VerificationException,
 			IOException {
 		try {
@@ -114,14 +129,14 @@ public class MojoITSteps {
 		}
 	}
 
-	@Then("^there should have been a Project (.*) property with value (.*)$")
+	@Then("^there should be a Project (.*) property with value (.*)$")
 	public void assertProjectProperty(String property, String value)
 			throws VerificationException {
 		assertThat("An exception was thrown", thrown, nullValue());
 		verifier.verifyTextInLog("project." + property + "=" + value);
 	}
 
-	@Then("^there should have been a System (.*) property with value (.*)$")
+	@Then("^there should be a System (.*) property with value (.*)$")
 	public void assertSystemProperty(String property, String value)
 			throws VerificationException {
 		assertThat("An exception was thrown", thrown, nullValue());
@@ -138,11 +153,12 @@ public class MojoITSteps {
 		// }
 	}
 
-	@Then("^an exception should be thrown with the message '(.*)'$")
+	@Then("^there should be an error message '(.*)'$")
 	public void anExceptionIsThrown(String message)
 			throws VerificationException {
 		assertThat("It looks like there was no exception thrown", thrown,
 				not(nullValue()));
+		System.err.println("this is the error thrown:" + thrown.toString());
 
 		assertThat(
 				"Thrown exception doesn't contain the expected message fragment",

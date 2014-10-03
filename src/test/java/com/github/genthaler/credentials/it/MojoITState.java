@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials;
+package com.github.genthaler.credentials.it;
 
 /*
  * #%L
@@ -82,6 +82,10 @@ public class MojoITState {
 			settings.addServer(server);
 		}
 		return server;
+	}
+
+	public Model getProject() {
+		return projectModel;
 	}
 
 	public void extractCurrentModel() throws IOException,
