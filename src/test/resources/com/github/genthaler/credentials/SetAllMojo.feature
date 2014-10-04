@@ -1,5 +1,5 @@
 @set-all
-Feature: Integration test of credentials-maven-plugin:set-all
+Feature: Test of credentials-maven-plugin:set-all
   In order to expose username and password properties
   As a Maven developer
   I want to execute a credentials maven plugin which will populate them from server settings or command line properties
