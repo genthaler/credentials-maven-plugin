@@ -1,4 +1,4 @@
-package com.github.genthaler.credentials.test;
+package com.github.genthaler.credentials;
 
 /*
  * #%L
