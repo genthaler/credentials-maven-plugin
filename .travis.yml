@@ -6,3 +6,4 @@ script: mvn clean install
 branches:
   only:
     - master
+sudo: false
