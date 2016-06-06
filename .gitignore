@@ -7,3 +7,6 @@
 /dependency-reduced-pom.xml
 /release.properties
 /target
+*.releaseBackup
+*.versionsBackup
+*.prefs
