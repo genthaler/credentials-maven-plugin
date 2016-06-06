@@ -1,12 +1,9 @@
-/target
-/.settings
+*.bak
+.tags
+/.c9revisions
 /.classpath
 /.project
-*.bak
-/.c9revisions
+/.settings
 /dependency-reduced-pom.xml
 /release.properties
-/target
-/target
-/target
 /target
