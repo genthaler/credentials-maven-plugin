@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>oss-parent</artifactId>
 		<groupId>com.github.genthaler</groupId>
-		<version>5-SNAPSHOT</version>
+		<version>5</version>
 	</parent>
 	<artifactId>credentials-maven-plugin</artifactId>
 	<version>1.2-SNAPSHOT</version>
@@ -101,6 +101,14 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>net.masterthought</groupId>
