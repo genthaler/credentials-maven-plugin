@@ -19,6 +19,10 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+	<poweredBy>
+		<logo
+			img="${project.ciManagement.url}.svg?branch=master" />
+	</poweredBy>
 	<skin>
 		<groupId>org.apache.maven.skins</groupId>
 		<artifactId>maven-fluido-skin</artifactId>
@@ -28,13 +32,6 @@
 		<fluidoSkin>
 			<topBarEnabled>true</topBarEnabled>
 			<sideBarEnabled>true</sideBarEnabled>
-			<!-- <topBarEnabled>true</topBarEnabled> -->
-			<!-- <topBarIcon> -->
-			<!-- <name>Maven Fluido Skin</name> -->
-			<!-- <alt>Maven Fluido Skin</alt> -->
-			<!-- <src>/images/topbar-logo.png</src> -->
-			<!-- <href>/index.html</href> -->
-			<!-- </topBarIcon> -->
 			<topBarEnabled>true</topBarEnabled>
 			<topBarContainerStyle>width: 90%;</topBarContainerStyle>
 			<topBarEnabled>true</topBarEnabled>
