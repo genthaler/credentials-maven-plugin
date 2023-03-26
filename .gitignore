@@ -11,3 +11,4 @@
 *.versionsBackup
 *.prefs
 /credentials-maven-plugin.iml
+.DS_Store
