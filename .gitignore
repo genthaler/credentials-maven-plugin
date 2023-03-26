@@ -10,3 +10,4 @@
 *.releaseBackup
 *.versionsBackup
 *.prefs
+/credentials-maven-plugin.iml
